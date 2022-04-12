@@ -1,0 +1,41 @@
+/* #002630 BACKGROUDND */
+/* #a9e0d9 #8cedc8 #009560 #3bd5fd GREENISH */
+/* #e20c34 #bd4525 REDISH */
+
+.coin_element {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 1em .7em;
+    padding: 5px;
+    text-align: left;
+    box-shadow: rgba(59, 213, 253, 0.3) 0px 0px 0px 3px;
+}
+
+.coin_element > div {
+    overflow: hidden;
+    min-width: 85px;
+    max-width: 250px;
+    vertical-align:middle;
+}
+
+.coin_search {
+    position: relative;
+    display: flex;
+    margin: auto;
+    margin-bottom: 1.5rem;
+    width: 70vw;
+    color: #a9e0d9;
+    background-color: transparent;
+    border-bottom: 3px solid #e20c34;
+    border-radius: 0;
+}
+
+.lastchild {
+    text-align: right;
+}
+
+.add_watchlist_btn {
+    width: 60px;
+    height: 25px;
+}

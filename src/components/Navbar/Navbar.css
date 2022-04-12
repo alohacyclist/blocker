@@ -1,0 +1,34 @@
+nav {
+    height: 3.5rem;
+    background-color: rgba(59, 213, 253, 0.4);
+    margin-bottom: 5rem;
+    overflow: hidden;
+}
+
+.hamburger { font-size: 3rem; }
+
+/* .dropdown_group {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    color: #a9e0d9;
+}
+
+.dropdown button { display: block;}
+
+.dropdown { display: none }
+
+.hamburger:hover .dropdown { 
+    cursor: pointer;
+    display: block; } */
+
+.nav_btn {
+    width: 100px;
+    margin: 20px;
+    border-radius: 4px;
+    background-color: rgba(59, 213, 253, 1);
+}
+
+/* #002630 BACKGROUDND */
+/* #a9e0d9 #8cedc8 #009560 #3bd5fd GREENISH */
+/* #e20c34 #bd4525 REDISH */
