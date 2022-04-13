@@ -23,14 +23,13 @@ export function Signup() {
     setLogin(true)
   }
 
-/*   useEffect(() => {
-    navigate('/login')
-  }, [handleSubmit]) */
+  const handleClose = () => {setOpenSignup(false)}
 
   return ReactDom.createPortal(
     <>
     <div className='overlay'></div>
     <div className='signup_container'>
+    <p onClick={handleClose}>X</p>
       <form onSubmit={handleSubmit}>
         <h2>Signup-Form</h2>
         {/* <label htmlFor='firstName'>First name:</label> */}

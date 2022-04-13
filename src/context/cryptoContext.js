@@ -62,17 +62,24 @@ export const CryptoContextProvider = props => {
         }
     }
 
-
-
     useEffect(() => {
         verify()
     }, [])
 
+    
+
     const [openLogin, setLogin] = useState(false)
     const [openSignup, setOpenSignup] = useState(false)
 
+    const [coinSelect, setCoinSelect] = useState('bitcoin')
+
+    const handleSelect = (e, coin) => {
+        e.preventDefault()
+        setCoinSelect(coin)
+      }
+
     const values = {
-        user, signup, login, currency, setCurrency, userWatchlist, setUser,
+        user, signup, login, currency, setCurrency, userWatchlist, setUser, handleSelect,
         watchlist, isLoading, setIsLoading, setUserWatchlist, navigate, openLogin, setLogin, openSignup, setOpenSignup
     }
 

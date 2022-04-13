@@ -1,7 +1,7 @@
 export { CoinList } from './Coins/CoinList'
 export { Coin } from './Coins/Coin'
-export { CoinChart } from './Coins/CoinChart'
 export { Navbar } from './Navbar/Navbar'
 export { Watchlist } from './Watchlist/Watchlist'
 export { Signup } from './Navbar/Signup'
 export { Login } from './Navbar/Login'
+export { CoinChart } from './Charts/CoinChart'

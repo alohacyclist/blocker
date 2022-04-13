@@ -3,6 +3,7 @@ import { CryptoContext } from '../../context/cryptoContext'
 import { Coin } from './Coin'
 import coingecko from '../../api/coingecko'
 import styles from './Coin.module.css'
+import { CoinChart } from '../Charts/CoinChart'
 
 
 export function CoinList() {
@@ -14,7 +15,7 @@ export function CoinList() {
 
   const fetchCoins = async () => {
       setIsLoading(true)
-      const {data} = await coingecko.get(`coins/markets/?vs_currency=${currency}`)
+      const {data} = await coingecko.get(`coins/markets/?vs_currency=${currency}`) /* for testing: &ids=bitcoin%2C%20ethereum */
       setCoinList(data)
       setCoinFilter(data)
       setIsLoading(false)
@@ -29,8 +30,13 @@ export function CoinList() {
     setCoinList(results)
   },[coinSearch])
 
+ 
+
   return (
     <div>
+
+      <div> {/* <CoinChart /> */} </div> 
+        
       <input className={styles.coin_search} value={coinSearch} onChange={(e) => setCoinSearch(e.target.value)} placeholder='Search for cryptocurrency...' />
       {isLoading? 'Loading...' : null }
       {coinList.map((coin) => {return (<Coin key={coin.id} coin={coin}/>)} )}

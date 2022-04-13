@@ -1,6 +1,5 @@
-import React, { useContext, useState } from 'react'
-import { CoinList, CoinDetails, CoinChart, Signup, Login } from '../components'
-import { CryptoContext } from '../context/cryptoContext'
+import React from 'react'
+import { CoinList, Signup, Login } from '../components'
 
 export function Home() {
 
@@ -9,7 +8,6 @@ export function Home() {
     <div>
         <Signup />
         <Login />
-        <CoinChart />
         <CoinList />
     </div>
   )

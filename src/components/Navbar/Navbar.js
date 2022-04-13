@@ -5,7 +5,7 @@ import './Navbar.css'
 
 export function Navbar() {
 
-  const { setOpenSignup, setLogin, setUser, navigate } = useContext(CryptoContext)
+  const { setOpenSignup, setLogin, setUser, navigate, user } = useContext(CryptoContext)
 
   const handleSignupForm = (e) => {
     e.preventDefault()
@@ -32,13 +32,11 @@ export function Navbar() {
         <div className='dropdown_group'>
           {/* <div className='hamburger'>&#9776;</div>
           <div className='dropdown'> */}
-            <button className='nav_btn' onClick={(e) => {handleLoginForm(e)}} >Login</button>
-            {/* <button className='nav_btn' onClick={logout()} >Logout</button> */}
-            <button className='nav_btn' onClick={(e) => {handleSignupForm(e)}} >Signup</button>
-            <Link to='/'><button className='nav_btn'>Home</button></Link>
-            <Link to='/user/profile'><button className='nav_btn'>Profile</button></Link>
+            <button className='nav_btn' onClick={(e) => {handleLoginForm(e)}}>Login</button>
+            <button className='nav_btn' onClick={(e) => {handleSignupForm(e)}} >Signup</button> {/* signup option link on logion form */}
+            <Link to='/'>Home</Link>
+            {user ? <Link to='/user/profile'>Profile</Link> : <button className='nav_btn' onClick={(e) => {handleLoginForm(e)}}>Login</button>}
           </div>
-        {/* </div> */}
     </nav>
   )
 }

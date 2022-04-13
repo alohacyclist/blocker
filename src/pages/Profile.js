@@ -4,7 +4,7 @@ import { CryptoContext } from '../context/cryptoContext'
 
 export function Profile() {
 
-    const { user, userWatchlist, currency } = useContext(CryptoContext)
+    const { user, userWatchlist, currency, watchlist } = useContext(CryptoContext)
 
     // ADD WATCHLIST Component ! refactor
 
@@ -12,13 +12,20 @@ export function Profile() {
         console.log('click')
     }
 
-    const handleDelete = async (coin) => {
+    // remove coin from watchlist and render updated watchlist
+    const handleDelete = async (e, coin) => {
+        e.preventDefault()
         console.log(coin, 'removed')
         const data = {id: coin}
         const config = { headers: {Authorization: localStorage.getItem('token')} }
         await client.post(`/watchlist/${userWatchlist.id._id}/coin`, data, config)
-        window.location.reload()
+        await watchlist(user._id)
     }
+
+    // load watchlist upon loading profile page
+    useEffect(() => {
+        watchlist(user?._id)
+    }, [])
 
     return (
         <div>
@@ -29,7 +36,7 @@ export function Profile() {
                 {user?.lastName}
             </div>
 
-            {userWatchlist?.coins.map(coin => {
+            {userWatchlist.coins.map(coin => {
                 return(
                 <div key={coin._id} style={{border:'1px solid blue'}} >
                     <div>
@@ -38,7 +45,7 @@ export function Profile() {
                         <p>Price when added:{coin.priceWhenAdded}{currency}</p>
                         <p>Notes:{coin.notes}</p>
                     </div>
-                    <button onClick={ (e) => handleDelete(coin._id) } >Remove Coin</button>
+                    <button onClick={ (e) => handleDelete(e, coin._id) } >Remove Coin</button>
                 </div>)
                 
             })}

@@ -1,12 +1,12 @@
 * {
     margin: 0;
     box-sizing: border-box;
-    
 }
 
 body {
     background-color: #002630;
     color: #a9e0d9;
+    line-height: 1.2;
 }
 
 /* #002630 BACKGROUDND */

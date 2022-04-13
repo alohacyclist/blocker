@@ -1,12 +1,20 @@
 /* #002630 BACKGROUDND */
 /* #a9e0d9 #8cedc8 #009560 #3bd5fd GREENISH */
 /* #e20c34 #bd4525 REDISH */
+:root {
+    --background: rgba(59, 213, 253, 1);
+    --green_contrast: #a9e0d9;
+    --red_contrast: #e20c34;
+}
 
 .coin_element {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 1em .7em;
+    max-width: 960px;
+    width: 90vw;
+    height: 6rem;
+    margin: 1.3em auto;
     padding: 5px;
     text-align: left;
     box-shadow: rgba(59, 213, 253, 0.3) 0px 0px 0px 3px;
@@ -15,8 +23,7 @@
 .coin_element > div {
     overflow: hidden;
     min-width: 85px;
-    max-width: 250px;
-    vertical-align:middle;
+    max-width: 200px;
 }
 
 .coin_search {
@@ -25,7 +32,7 @@
     margin: auto;
     margin-bottom: 1.5rem;
     width: 70vw;
-    color: #a9e0d9;
+    color: --green_contrast;
     background-color: transparent;
     border-bottom: 3px solid #e20c34;
     border-radius: 0;
@@ -35,7 +42,22 @@
     text-align: right;
 }
 
+.lastchild > button { margin-right: .5em;}
+
 .add_watchlist_btn {
-    width: 60px;
-    height: 25px;
+    width: 35px;
+    height: 35px;
+    border-radius: 2px;
+}
+
+@media (max-width: 800px) {
+    .coin_element {
+        min-width: 300px;
+        max-width: 95vw; 
+    }
+}
+
+@media (max-width: 380px) {
+    .add_watchlist_btn {  width: 25px; height: 25px; }
+    .coin_element > div {  overflow: hidden;  min-width: 50px; }
 }
