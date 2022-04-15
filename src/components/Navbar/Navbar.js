@@ -35,6 +35,9 @@ export function Navbar() {
             <button className='nav_btn' onClick={(e) => {handleLoginForm(e)}}>Login</button>
             <button className='nav_btn' onClick={(e) => {handleSignupForm(e)}} >Signup</button> {/* signup option link on logion form */}
             <Link to='/'>Home</Link>
+            
+            <Link to='/watchlist'>Watchlists</Link>
+
             {user ? <Link to='/user/profile'>Profile</Link> : <button className='nav_btn' onClick={(e) => {handleLoginForm(e)}}>Login</button>}
           </div>
     </nav>

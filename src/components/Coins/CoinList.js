@@ -15,7 +15,7 @@ export function CoinList() {
 
   const fetchCoins = async () => {
       setIsLoading(true)
-      const {data} = await coingecko.get(`coins/markets/?vs_currency=${currency}`) /* for testing: &ids=bitcoin%2C%20ethereum */
+      const {data} = await coingecko.get(`coins/markets/?vs_currency=${currency}&ids=bitcoin%2C%20ethereum`) /* for testing: &ids=bitcoin%2C%20ethereum */
       setCoinList(data)
       setCoinFilter(data)
       setIsLoading(false)

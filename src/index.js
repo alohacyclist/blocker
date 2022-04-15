@@ -4,6 +4,7 @@ import App from './App'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Home, NotFound, Profile } from "./pages"
 import { CryptoContextProvider } from './context/cryptoContext';
+import { Watchlist } from "./components";
 
 const rootElement = document.getElementById("root");
 ReactDOM.render(
@@ -16,6 +17,7 @@ ReactDOM.render(
             {/* <Route path='/signup' element={<Signup />} />
             <Route path='/login' element={<Login />} /> */}
             <Route path='/user/profile' element={<Profile />} />
+            <Route path='/watchlist' element={<Watchlist />} />
             <Route path='*' element={<NotFound />} />
           </Route>
         </Routes>

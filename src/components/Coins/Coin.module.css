@@ -7,13 +7,18 @@
     --red_contrast: #e20c34;
 }
 
+.chart {
+    width: 350px;
+    height: 6rem;
+}
+
 .coin_element {
     display: flex;
     justify-content: space-between;
     align-items: center;
     max-width: 960px;
     width: 90vw;
-    height: 6rem;
+    height: 8rem;
     margin: 1.3em auto;
     padding: 5px;
     text-align: left;

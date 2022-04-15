@@ -1,18 +1,85 @@
-import React, { useState, useContext, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import styles from './Coin.module.css'
 import { client } from '../../client'
 import { CryptoContext } from '../../context/cryptoContext'
-import { CoinChart } from '../Charts/CoinChart'
 import coingecko from '../../api/coingecko'
+import { Chart as ChartJS, LineElement, PointElement, CategoryScale, LinearScale } from 'chart.js'
+import { Line } from 'react-chartjs-2'
 
+ChartJS.register(CategoryScale, LinearScale, LineElement, PointElement)
 
 export function Coin({coin}) {
 
   const {handleSelect} = useContext(CryptoContext)
+  const [chartData, setChartData] = useState([])
 
+// get coin chart data
+const getChartData = async () => {
+    const day = await coingecko.get(`/coins/${coin.id}/market_chart`, {
+      params: {
+        vs_currency: 'usd',
+        days: '1'
+      }
+  })
+  setChartData(day.data.prices)
+}
+
+useEffect(() => {
+  getChartData()
+}, [])
+
+const labels = chartData?.map(dataset =>  new Date(dataset[0]).toLocaleDateString())
+
+const formatedData = {
+  labels,
+  datasets: [{
+    label: 'usd',
+    data: chartData?.map(dataset => dataset[1])
+    }]
+  }
+
+const options = {
+  borderColor: 'rgba(59, 213, 253, 1)',
+  pointRadius: 0,
+  tension: .1,
+  fill: false,
+  legend: {
+    display: false
+  },
+  backgroundColor: 'transparent',
+  scales: {
+    x: {
+      ticks: {
+        display: false,
+      },
+      grid: {
+        display: false,
+        drawBorder: false
+      }
+    },
+    y: {
+      ticks: {
+        display: false,
+      },
+      grid: {
+        display: false,
+        drawBorder: false
+      }
+    }
+  },
+  maintainAspectRatio: false,
+  lineHeightAnnotation: {
+    always: false,
+    hover: true,
+    lineWeight: .2
+  },
+  animation: {
+    duration: 2500
+}}
+
+  // add coin to user watchlist
   const [added, setAdded] = useState(false)
 
-  // add this coin to the users watchlist
   const addCoin = async (e) => {
     e.preventDefault()
 
@@ -36,8 +103,8 @@ export function Coin({coin}) {
         <p>{coin.id}</p>
         <p>{coin.price_change_percentage_24h}</p>
       </div>
-      <div>
-        {/* {<Line />} */}
+      <div className={styles.chart}>
+        {<Line data={formatedData} options={options} />}
       </div>
       <div>
         <p>{coin.current_price}</p>

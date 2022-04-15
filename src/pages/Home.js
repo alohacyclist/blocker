@@ -1,5 +1,5 @@
 import React from 'react'
-import { CoinList, Signup, Login } from '../components'
+import { CoinList, Signup, Login, Watchlist } from '../components'
 
 export function Home() {
 

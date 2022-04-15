@@ -43,7 +43,7 @@ export const CryptoContextProvider = props => {
     const watchlist = async (userId) => {
         try {
             const response = await client.get(`/watchlist/${userId}`)
-            console.log(response.data)
+            /* console.log(response.data) */
             setUserWatchlist(response.data)
         }  catch {
             console.log('could not get user watchlist')
@@ -76,6 +76,7 @@ export const CryptoContextProvider = props => {
     const handleSelect = (e, coin) => {
         e.preventDefault()
         setCoinSelect(coin)
+        console.log(coin)
       }
 
     const values = {
