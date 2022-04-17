@@ -1,24 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { client } from '../../client'
 import styles from './Watchlist.module.css'
 import {UserWatchlist} from './UserWatchlist'
+import { CryptoContext } from '../../context/cryptoContext'
 
 export function Watchlist() {
 
-  const [watchlists, setWatchlists] = useState([])
-
-  const getWatchlists = async () => {
-    const url = '/watchlist'
-    const config = {
-      headers: {
-        Authorization: localStorage.getItem('token'),
-      }
-    }
-    const {data} = await client.get(url, config)
-    setWatchlists(data)
-    console.log(data)
-  }
-
+  const {watchlists, setWatchlists, getWatchlists} = useContext(CryptoContext)
+  
   useEffect(() => {
     getWatchlists()
   }, [])

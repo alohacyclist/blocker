@@ -66,6 +66,20 @@ export const CryptoContextProvider = props => {
         verify()
     }, [])
 
+    const [watchlists, setWatchlists] = useState([])
+
+    const getWatchlists = async () => {
+      const url = '/watchlist'
+      const config = {
+        headers: {
+          Authorization: localStorage.getItem('token'),
+        }
+      }
+      const {data} = await client.get(url, config)
+      setWatchlists(data)
+      console.log(data)
+    }
+  
 
     // handle show of login and signup modals
     const [openLogin, setLogin] = useState(false)
@@ -78,12 +92,19 @@ export const CryptoContextProvider = props => {
         e.preventDefault()
         setCoinSelect(coin)
         console.log(coin)
-
       }
 
+    // calculate performance
+    const performance = (wasPrice, isPrice) => {
+      const calculateDifference = isPrice - wasPrice
+      const calculatePerformance = calculateDifference / (wasPrice * 100)
+      return calculatePerformance.toFixed(3)
+    }
+
     const values = {
-        user, signup, login, currency, setCurrency, userWatchlist, setUser, handleSelect, coinSelect, setCoinSelect,
-        watchlist, isLoading, setIsLoading, setUserWatchlist, navigate, openLogin, setLogin, openSignup, setOpenSignup
+        user, signup, login, currency, setCurrency, userWatchlist, setUser, handleSelect, coinSelect, setCoinSelect, 
+        watchlists, setWatchlists, watchlist, isLoading, setIsLoading, setUserWatchlist, navigate, openLogin, 
+        setLogin, openSignup, setOpenSignup, getWatchlists, performance
     }
 
     return (

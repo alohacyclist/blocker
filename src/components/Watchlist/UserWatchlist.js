@@ -6,11 +6,12 @@ import { CryptoContext } from '../../context/cryptoContext'
 
 export function UserWatchlist({watchlist}) {
 
-  const {currency, setIsLoading, user } = useContext(CryptoContext)
+  const {currency, setIsLoading, user, watchlists, setWatchlists, getWatchlists, performance } = useContext(CryptoContext)
 
   const [select, setSelect] = useState(false)
   const [coins, setCoins] = useState([])
   const [coinPriceNow, setCoinPriceNow] = useState([])
+  const [watchlistLikes, setWatchlistLikes] = useState()
 
   let coinCopy = coins
 
@@ -52,18 +53,19 @@ export function UserWatchlist({watchlist}) {
   useEffect(() => {fetchCoinPrices()}, [coins])
   useEffect(() => {getCoinCopy()}, [coinPriceNow])
 
-  const [watchlistLike, setWatchlistLike] = useState([])
+  const handleLike = async (watchlist) => {
 
-  const handleLike = async (watchlist_id) => {
-    console.log(watchlist_id)
-    const url = `/watchlist/${watchlist_id}`
+    /* console.log(watchlist) */
+    const url = `/watchlist/${watchlist._id}`
     const config = {
       headers: {
         Authorization: localStorage.getItem('token'),
       }
     }
     await client.post(url, config)
-    console.log(data)
+    setWatchlistLikes(watchlist.votes.length)
+    getWatchlists()
+    /* console.log(watchlist.votes) */
   }
 
   return (
@@ -72,17 +74,24 @@ export function UserWatchlist({watchlist}) {
         {select ? (
         <div>
           <div>{watchlist?.id?.firstName}'s Watchlist</div>
+          {/* {console.log(watchlist)} */}
             {coinCopy.map(coin => {return (
               <div key={coin._id} >
               
                 {console.log(coin)}
                 <div>{coin.name}</div>
-                <div>Price when added:{coin.priceWhenAdded}</div>
+                
+                <div>Added on:{new Date(coin.addedAt).toLocaleDateString()}@{coin.priceWhenAdded}{currency}</div>
                 <div>Price now: {coin.current_price?.current_price}</div>
+                <div>Coin Performance:  {performance(coin.priceWhenAdded, coin.current_price?.current_price)} %</div>
+
               </div>
               )})}
+          
+          <div>Watchlist Performance: {}</div>
 
-          <button onClick={(e) => handleLike(watchlist._id)}>Like</button>
+          <div>Likes: {watchlist?.votes?.length}</div>
+          <button onClick={() => handleLike(watchlist)}>Like</button>
 
         </div>) : (
         <div>
