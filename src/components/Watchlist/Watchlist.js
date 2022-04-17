@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { client } from '../../client'
 import styles from './Watchlist.module.css'
+import {UserWatchlist} from './UserWatchlist'
 
 export function Watchlist() {
 
@@ -22,33 +23,14 @@ export function Watchlist() {
     getWatchlists()
   }, [])
 
-  const [watchlistId, setWatchlistId] = useState('')
-
-  const handleWatchlistSelect = async (e, watchlist_id) => {
-    e.preventDefault()
-    console.log(watchlist_id)
-    const url = `/watchlist/${watchlist_id}`
-    const config = {
-      headers: {
-        Authorization: localStorage.getItem('token'),
-      }
-    }
-    const {data} = await client.get(url, config)
-    console.log(data)
-  }
-
   return (
     <>
-      <div>Watchlist</div>
-      {watchlists.map(watchlist => {
-        return (
-        <div className={styles.watchlist_list} onClick={(e)=>handleWatchlistSelect(e, watchlist.id._id)}>
-          <p>User: {watchlist.id.firstName}</p>
-          <p>Coins in Watchlist: {watchlist.coins.length}</p>
-          <p>Votes: {watchlist.votes.length}</p>
+      <div>Watchlists</div>
+
+        <div>
+          {watchlists.map(watchlist => { return ( <UserWatchlist watchlist={watchlist} key={watchlist._id}/> )})}
         </div>
-        )
-      })}
+      
     </>
   )
 }

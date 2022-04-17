@@ -8,13 +8,14 @@ export function Signup() {
 
   const { signup, openSignup, setOpenSignup, setLogin } = useContext(CryptoContext)
 
-  if(!openSignup) return null
-
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [passwordRepeat, setPasswordRepeat] = useState('')
+
+  if(!openSignup) return null
+
 
   const handleSubmit = (e) => {
     e.preventDefault()

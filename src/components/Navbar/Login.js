@@ -6,10 +6,12 @@ export function Login() {
 
   const { login, openLogin, navigate, setLogin } = useContext(CryptoContext)
 
-  if(!openLogin) return null
 
   const [mail, setMail] = useState('');
   const [password, setPassword] = useState('');
+
+  if(!openLogin) return null
+
 
   const handleSubmit = (e) => {
     e.preventDefault()

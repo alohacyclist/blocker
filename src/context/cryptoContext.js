@@ -44,7 +44,7 @@ export const CryptoContextProvider = props => {
         try {
             const response = await client.get(`/watchlist/${userId}`)
             /* console.log(response.data) */
-            setUserWatchlist(response.data)
+            setUserWatchlist(response?.data)
         }  catch {
             console.log('could not get user watchlist')
         }
@@ -66,21 +66,23 @@ export const CryptoContextProvider = props => {
         verify()
     }, [])
 
-    
 
+    // handle show of login and signup modals
     const [openLogin, setLogin] = useState(false)
     const [openSignup, setOpenSignup] = useState(false)
 
+    // set prominent chart default to bitcoin
     const [coinSelect, setCoinSelect] = useState('bitcoin')
 
     const handleSelect = (e, coin) => {
         e.preventDefault()
         setCoinSelect(coin)
         console.log(coin)
+
       }
 
     const values = {
-        user, signup, login, currency, setCurrency, userWatchlist, setUser, handleSelect,
+        user, signup, login, currency, setCurrency, userWatchlist, setUser, handleSelect, coinSelect, setCoinSelect,
         watchlist, isLoading, setIsLoading, setUserWatchlist, navigate, openLogin, setLogin, openSignup, setOpenSignup
     }
 

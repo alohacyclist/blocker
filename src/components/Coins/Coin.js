@@ -10,7 +10,7 @@ ChartJS.register(CategoryScale, LinearScale, LineElement, PointElement)
 
 export function Coin({coin}) {
 
-  const {handleSelect} = useContext(CryptoContext)
+  const {handleSelect, setCoinSelect} = useContext(CryptoContext)
   const [chartData, setChartData] = useState([])
 
 // get coin chart data
@@ -82,7 +82,7 @@ const options = {
 
   const addCoin = async (e) => {
     e.preventDefault()
-
+    console.log(coin.name, 'added to watchlist')
     const url = '/coin/watchlist'
     const data = {
       name: coin.id,

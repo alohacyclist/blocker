@@ -36,7 +36,7 @@ export function Profile() {
                 {user?.lastName}
             </div>
 
-            {userWatchlist.coins.map(coin => {
+            {userWatchlist?.coins?.map(coin => {
                 return(
                 <div key={coin._id} style={{border:'1px solid blue'}} >
                     <div>
