@@ -3,10 +3,11 @@ import styles from './Watchlist.module.css'
 import { client } from '../../client'
 import coingecko from '../../api/coingecko'
 import { CryptoContext } from '../../context/cryptoContext'
+import {AiOutlineLike} from 'react-icons/ai'
 
 export function UserWatchlist({watchlist}) {
 
-  const {currency, setIsLoading, user, watchlists, setWatchlists, getWatchlists, performance } = useContext(CryptoContext)
+  const {currency, setIsLoading, getWatchlists, coinPerformance} = useContext(CryptoContext)
 
   const [select, setSelect] = useState(false)
   const [coins, setCoins] = useState([])
@@ -17,9 +18,11 @@ export function UserWatchlist({watchlist}) {
 
   const handleWatchlistSelect = async (e, watchlist_id) => {
     e.preventDefault()
-
-    const url = `/watchlist/${watchlist_id}`
-    const config = {
+    if(select) {
+      setSelect(false)
+    } else {
+      const url = `/watchlist/${watchlist_id}`
+      const config = {
       headers: {
         Authorization: localStorage.getItem('token'),
       }
@@ -28,6 +31,7 @@ export function UserWatchlist({watchlist}) {
 
     setSelect(true)
     setCoins(data.coins)
+    }
   }
 
   const fetchCoinPrices = async () => {
@@ -54,7 +58,6 @@ export function UserWatchlist({watchlist}) {
   useEffect(() => {getCoinCopy()}, [coinPriceNow])
 
   const handleLike = async (watchlist) => {
-
     /* console.log(watchlist) */
     const url = `/watchlist/${watchlist._id}`
     const config = {
@@ -69,34 +72,34 @@ export function UserWatchlist({watchlist}) {
   }
 
   return (
-    <div className={styles.watchlist_list} onClick={(e) => handleWatchlistSelect(e, watchlist.id._id)}>
+    <div className={styles.watchlist_item} onClick={(e) => handleWatchlistSelect(e, watchlist.id._id)}>
       {<div>
         {select ? (
-        <div>
-          <div>{watchlist?.id?.firstName}'s Watchlist</div>
+        <div className={styles.watchlist_item_selected}>
+          <div className={styles.watchlist_item_header}>
+            {watchlist?.id?.firstName}'s Watchlist
+            <div className={styles.likes_container} onClick={() => handleLike(watchlist)}>{watchlist?.votes?.length} <AiOutlineLike/></div>  
+          </div>
+
           {/* {console.log(watchlist)} */}
             {coinCopy.map(coin => {return (
-              <div key={coin._id} >
-              
-                {console.log(coin)}
-                <div>{coin.name}</div>
+              <div className={styles.watchlist_coins_container} key={coin._id} >
+              {/* <WatchlistCoin coin={coin} /> */}
+                {/* {console.log(coin)} */}
+                <div style={{backgroundColor: 'rgba(59, 213, 253, 1)', color: 'rgba(5, 0, 30, 1)'}}>{coin.name}</div>
                 
-                <div>Added on:{new Date(coin.addedAt).toLocaleDateString()}@{coin.priceWhenAdded}{currency}</div>
-                <div>Price now: {coin.current_price?.current_price}</div>
-                <div>Coin Performance:  {performance(coin.priceWhenAdded, coin.current_price?.current_price)} %</div>
-
+                <div>Added on:{new Date(coin.addedAt).toLocaleDateString()} @ {coin.priceWhenAdded} {currency}</div>
+                <div>Price now: {coin.current_price?.current_price} {currency}</div>
+                <div>Coin Performance:  {coinPerformance(coin.priceWhenAdded, coin.current_price?.current_price)} %</div>
               </div>
               )})}
           
-          <div>Watchlist Performance: {}</div>
-
-          <div>Likes: {watchlist?.votes?.length}</div>
-          <button onClick={() => handleLike(watchlist)}>Like</button>
+          {/* <div>Watchlist Performance : </div> */}
 
         </div>) : (
-        <div>
-          <div>{watchlist?.id?.firstName}</div>
-          <div>{watchlist?.id?.votes?.length}</div>
+        <div className={styles.watchlist_item_unselected}>
+          {watchlist?.id?.firstName}'s Watchlist
+          <div className={styles.likes_container}>{watchlist?.votes?.length} <AiOutlineLike/></div>
         </div>
       )}
       </div>}

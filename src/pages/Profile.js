@@ -1,54 +1,54 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { client } from '../client'
+import React, { useContext, useState } from 'react'
 import { CryptoContext } from '../context/cryptoContext'
+import styles from './Pages.module.css'
+import {AiOutlineLike} from 'react-icons/ai'
 
 export function Profile() {
 
-    const { user, userWatchlist, currency, watchlist } = useContext(CryptoContext)
+    const { user, watchlist, userWatchlist, editProfile, navigate, verify } = useContext(CryptoContext)
 
-    // ADD WATCHLIST Component ! refactor
+    const [like, setLike] = useState('Likes')
+    const [edit, setEdit] = useState(false)
 
-    const addNotes = async () => {
-        console.log('click')
-    }
+    const [email, setEmail] = useState(user?.email)
+    const [password, setPassword] = useState(user?.password)
+    /* const [passwordRepeat, setPasswordRepeat] = useState('') */
 
-    // remove coin from watchlist and render updated watchlist
-    const handleDelete = async (e, coin) => {
+    const handleSubmit = (e) => {
         e.preventDefault()
-        console.log(coin, 'removed')
-        const data = {id: coin}
-        const config = { headers: {Authorization: localStorage.getItem('token')} }
-        await client.post(`/watchlist/${userWatchlist.id._id}/coin`, data, config)
-        await watchlist(user._id)
+        editProfile(email, password)
+        setEdit(false)
+        navigate('/user/profile')
     }
 
-    // load watchlist upon loading profile page
-    useEffect(() => {
-        watchlist(user?._id)
-    }, [])
+    useState(async () => {
+        verify()
+        await watchlist(user?._id)
+        userWatchlist?.votes?.length === 1 ? setLike('Like') : setLike('Likes')
+    }, [edit])
 
     return (
         <div>
-            <div style={{border:'1px solid blue'}}>
-                <h2>Profile</h2>
-                {user?.email}
-                {user?.firstName}
-                {user?.lastName}
+            {edit ? 
+            <form  className={styles.profile_container} onSubmit={handleSubmit}>
+                <label>{email}</label>
+                <input value={email} type='email' onChange={(e) => {setEmail(e.target.value)}}></input>
+                <input type='password' onChange={(e) => {setPassword(e.target.value)}} placeholder='Enter new password' ></input>
+                <button>Save</button>
+            </form> : 
+            <div className={styles.profile_container}>
+                <div style={{display:'flex', justifyContent: 'space-between'}}>
+                    <h2 style={{color: 'rgba(235, 248, 232, 1)'}}>Welcome, {user?.firstName}</h2>
+                    <div style={{backgroundColor: 'rgba(59, 213, 253, 1)', alignSelf: 'center', padding: '3px', border: '2px solid #f79000'}} ><AiOutlineLike/> {userWatchlist?.votes.length} {like}</div>
+                </div>
+                <p style={{backgroundColor: 'rgba(226, 41, 120, 1)', border: '2px solid #f79000', padding: '3px' }} >{user?.email}</p>
+                <div>
+                    <p style={{color: 'rgba(235, 248, 232, 1)',backgroundColor: 'rgba(42, 26, 71, 1)', border: '2px solid #f79000', padding: '3px' }}>{user?.firstName} {user?.lastName}</p>
+                </div>                
+                <button style={{borderRadius: '1px'}} onClick={() => setEdit(true)}>Edit Profile</button>
             </div>
-
-            {userWatchlist?.coins?.map(coin => {
-                return(
-                <div key={coin._id} style={{border:'1px solid blue'}} >
-                    <div>
-                        <p>{coin.name}</p>
-                        <p>Date added:{coin.addedAt}</p>
-                        <p>Price when added:{coin.priceWhenAdded}{currency}</p>
-                        <p>Notes:{coin.notes}</p>
-                    </div>
-                    <button onClick={ (e) => handleDelete(e, coin._id) } >Remove Coin</button>
-                </div>)
-                
-            })}
+            }
+            
         </div>
     )
 }

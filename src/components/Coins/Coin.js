@@ -5,12 +5,14 @@ import { CryptoContext } from '../../context/cryptoContext'
 import coingecko from '../../api/coingecko'
 import { Chart as ChartJS, LineElement, PointElement, CategoryScale, LinearScale } from 'chart.js'
 import { Line } from 'react-chartjs-2'
+import {CgPlayListAdd, CgPlayListCheck} from 'react-icons/cg'
+
 
 ChartJS.register(CategoryScale, LinearScale, LineElement, PointElement)
 
 export function Coin({coin}) {
 
-  const {handleSelect, setCoinSelect} = useContext(CryptoContext)
+  const {handleSelect, currency, navigate, user} = useContext(CryptoContext)
   const [chartData, setChartData] = useState([])
 
 // get coin chart data
@@ -33,7 +35,7 @@ const labels = chartData?.map(dataset =>  new Date(dataset[0]).toLocaleDateStrin
 const formatedData = {
   labels,
   datasets: [{
-    label: 'usd',
+    label: `${currency}`,
     data: chartData?.map(dataset => dataset[1])
     }]
   }
@@ -74,11 +76,8 @@ const options = {
     lineWeight: .2
   },
   animation: {
-    duration: 2500
+    duration: 2000
 }}
-
-  // add coin to user watchlist
-  const [added, setAdded] = useState(false)
 
   const addCoin = async (e) => {
     e.preventDefault()
@@ -94,91 +93,46 @@ const options = {
       }
     }
     await client.post(url, data, config)
-    setAdded(true)
+    navigate('/user/watchlist')
   }
+
+  // check database for coins in users watchlist
+  // when the coin element is rendered, check if this coin is in the users watchlist
+  const [renderAddCoin, setRenderAddCoin] = useState()
+
+  const checkUserWatchlist = async () => {
+    try {
+      const {data} = await client.post(`/watchlist/${coin.id}/check`)
+      setRenderAddCoin(data)
+      console.log('check:', data)
+    } catch {
+      console.log('could not get your watchlist')
+    }
+  }
+
+  useEffect(() => {
+    user ?  checkUserWatchlist() : null
+      }, [])
   
   return (
-    <div className={styles.coin_element} onClick={(e) => handleSelect(e, coin.id) } >
+    <div className={styles.coin_element} onClick={(e) => {handleSelect(e, coin.id), window.scrollTo(0, 0)} } >
       <div>
-        <p>{coin.id}</p>
-        <p>{coin.price_change_percentage_24h}</p>
+        <img src={coin.image} alt={coin.image} style={{width: '2rem'}} />
+        <p>{coin.id.charAt(0).toUpperCase() + coin.id.slice(1)}</p>
+        <p>{coin.current_price} {currency}</p>
+        <p>{coin.price_change_percentage_24h.toFixed(2)}%</p>
       </div>
       <div className={styles.chart}>
         {<Line data={formatedData} options={options} />}
       </div>
-      <div>
-        <p>{coin.current_price}</p>
-      </div>
+      
       <div className={styles.lastchild}>
-      {added ? <p>Added</p> : <button onClick={(e) => addCoin(e)} className={styles.add_watchlist_btn} >+</button> }
+        {user ? 
+          renderAddCoin ? 
+            <button className={styles.add_watchlist_btn} style={{pointerEvents: 'none'}}><CgPlayListCheck/></button> : 
+            <button onClick={(e) => addCoin(e)} className={styles.add_watchlist_btn}><CgPlayListAdd/></button> :
+            null}
       </div>
     </div>
   )
 }
-
-  // CHART
-
-/*   const [coinChartData, setCoinChartData] = useState({})
-
-  // convert api data for chart
-  const formatData = data => {
-    return data.map(el => {
-      return {
-        time: el[0],
-        price: el[1].toFixed(2),
-      }
-    })
-  } */
-  
-  // get coin chart data
-/*   const getChartData = async () => {
-    const day = await coingecko.get(`/coins/${coin.id}/market_chart`, {
-      params: {
-        vs_currency: 'usd',
-        days: '1'
-      }
-    })
-    
-    setCoinChartData(formatData(day.data.prices)) */
-
-
-    /* Promise.all([
-      coingecko.get(`/coins/${coin.id}/market_chart`, {
-        params: {
-          vs_currency: 'usd',
-          days: '1'
-        }
-      }),
-       coingecko.get(`/coins/${coin.id}/market_chart`, {
-        params: {
-          vs_currency: 'usd',
-          days: '7'
-        }
-      }),
-      coingecko.get(`/coins/${coin.id}/market_chart`, {
-        params: {
-          vs_currency: 'usd',
-          days: '30'
-        }
-      }),
-      coingecko.get(`/coins/${coin.id}/market_chart`, {
-        params: {
-          vs_currency: 'usd',
-          days: '365'
-        }
-      })
-      ])  */
-
-    /* setCoinChartData({
-      day: formatData(day.data.prices),
-      week: formatData(week.data.prices),
-      month: formatData(month.data.prices),
-      year: formatData(year.data.prices)
-    }) 
-
-  } */
-
-  //request historical chart data from api when component loads
-/*   useEffect(() => {
-    getChartData() 
-  }, []) */
