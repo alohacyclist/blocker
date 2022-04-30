@@ -9,7 +9,7 @@ ChartJS.register(CategoryScale, LinearScale, LineElement, PointElement)
 
 export function CoinChart() {
 
-  const {currency, setCurrency, isLoading, setIsLoading, coinSelect} = useContext(CryptoContext)
+  const {currency, isLoading, setIsLoading, coinSelect} = useContext(CryptoContext)
 
   const [chartData, setChartData] = useState([])
   const [chartInfo, setChartInfo] = useState()
@@ -26,7 +26,7 @@ export function CoinChart() {
 
 const getChartInfo = async (coinSelect) => {
   const {data} = await coingecko.get(`coins/markets/?vs_currency=${currency}&ids=${coinSelect}`)
-  /* console.log(data) */
+  console.log('chartInfo:',data)
   setChartInfo(data[0])
 }
 
@@ -86,7 +86,8 @@ const options = {
         <div>
 
           <div className={styles.top_chart_info_stack} >
-            <h1>{chartInfo?.symbol.toUpperCase()}</h1>
+            <img style={{width: '25px', height: '25px'}} src={chartInfo?.image} alt={chartInfo?.image} />
+            <h2>{chartInfo?.symbol.toUpperCase()}</h2>
           </div>
           
           <div>

@@ -1,6 +1,8 @@
 :root {
     --background: rgba(59, 213, 253, 1);
     --background_opacity: rgba(59, 213, 253, .7);
+    --background_opacity1: rgba(59, 213, 253, .9);
+    --background_opacity2: rgba(59, 213, 253, .5);
     --green_contrast: rgba(169, 224, 217, 1);
     --text: rgba(235, 248, 232, 1);
     --bg: rgba(5, 0, 30, 1);
@@ -10,16 +12,23 @@
 }
 
 .chart {
-    width: 350px;
+    width: 330px;
     height: 6rem;
 }
 
 .top_chart_info_stack {
+    display: flex;
+    align-items: center;
     position: absolute;
-    color: var(--text);
-    font-family:  Arial, Helvetica, sans-serif;
-    top: 4rem;
-    left: 30px;
+    color: var(--background_opacity);
+    border: 2px solid;
+    border-color: var(--background);
+    padding: 5px;
+    border-radius: 5px;
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    font-weight:lighter;
+    top: 5rem;
+    right: 1rem;
     z-index: 3;
 }
 
@@ -33,13 +42,77 @@
     margin: 1.3em auto;
     padding: 5px;
     text-align: left;
-    box-shadow: rgba(59, 213, 253, 0.3) 0px 0px 0px 3px;
+    box-shadow: rgba(240, 46, 170, 0.4) 5px -5px, rgba(240, 46, 170, 0.3) 10px -10px, rgba(240, 46, 170, 0.2) 15px -15px;
+    border: 2px solid var(--background_opacity1);
+    border-radius: 2px;
+    position: relative;
+    background-color: var(--bg);
+}
+
+.coin_element_info_1 {
+    background-color: var(--background_opacity2);
+    color: var(--bg);
+    font-weight: 500;
+    border: 1px solid var(--background);
+    border-radius: 3px;
+    padding: 3px;
+    flex-wrap: wrap;
+}
+@media only screen and (max-width: 425px) {
+    .coin_element_info_1_icon {
+        display: none;
+    }
+}
+
+.coin_element_info_2 {
+    margin-top: 10px;
+    border: 1px solid var(--background);
+    border-radius: 3px;
+    padding: 3px;
 }
 
 .coin_element > div {
     overflow: hidden;
     min-width: 85px;
     max-width: 200px;
+}
+
+.select_time_btn_container {
+    display: flex;
+    justify-content: flex-start;
+    width: 400px;
+    margin: 1.7rem;
+}
+
+.select_currency_btn_container {
+    width: 250px;
+    display: flex;
+    justify-content: flex-start;
+    margin: auto 1.7rem;
+
+}
+
+ button {
+    background-color: transparent;
+    color: var(--background);
+    border: 1px solid var(--background);
+    border-radius: 4px;
+    width: 45px;
+    height: 25px;
+    margin-right: 15px;
+}
+
+.show_more_btn {
+    display: flex;
+    margin: auto;
+    background-color: transparent;
+    color: var(--background);
+    border: 1px solid var(--background);
+    border-radius: 4px;
+    width: 90px;
+    height: 35px; 
+    align-items: center;
+    text-align: center;
 }
 
 .coin_search {
@@ -50,6 +123,8 @@
     background-color: transparent;
     border-radius: 0;
     font-size: 1rem;
+    outline: none;
+    border: none;
 }
 
 .coin_search:active {
@@ -62,11 +137,19 @@
     display: flex;
     width: 70vw;
     color: rgba(235, 248, 232, 1);
-    background-color: transparent;
+    background-color: var(--bg);
+    outline: none;
+    border-left: var(--bg);
+    border-top: var(--bg);
+    border-right: var(--bg);
     border-bottom: 3px solid rgba(226, 41, 120, 1);
     border-radius: 0;
-    font-size: 1rem;
-    outline: none;
+    font-size: 1.3rem;
+    padding: 4px;
+    margin-bottom: 25px;
+    margin-top: 25px;
+    transition: 500ms ease-in;
+    transform-origin: left;
 }
 
 .coin_search_container {
@@ -115,38 +198,30 @@
     gap: 5px;
     background-color: var(--background_opacity);
     color: white;
+    box-shadow: rgba(240, 46, 170, 0.4) 5px -5px;
+
     font-size: .9rem;
     width: 200px;
     height: 200px;
     padding: 10px;
     margin: 5px;
-    z-index: -2;
 }
 
 .watchlist_coin_element_header {
     display: flex;
     text-align: left;
     justify-content: space-between;
+    height: 50px;
 }
 
 .watchlist_coin_element_info {
     border: 3px solid var(--bg);
+    box-shadow: var(--search_pink) 2px -2px;
     background-color: #f79000;
     color: var(--bg);
     padding: 2px;
     position: relative;
-}
-
-.watchlist_coin_element_info::after {
-    content: '';
-    background-color: transparent;
-    border: 3px solid var(--search_pink);
-    top: -6px;
-    left: 5px;
-    width: 97%;
-    height: 100%;
-    position: absolute;
-    z-index: -1;
+    z-index: 1;
 }
 
 .remove_coin_btn {
@@ -156,18 +231,20 @@
     color: var(--text);
     font-size: 1rem;
     position: relative;
-
+    width: 50px;
+    box-shadow: var(--yellow) 2px -2px;
 }
 
-.remove_coin_btn::after {
-    content: '';
-    border: 3px solid #f79000;
-    top: -4px;
-    left: 0px;
-    width: 96%;
-    height: 100%;
-    position: absolute;
-    z-index: -1;
+.remove_coin_btn:hover {
+    position: relative;
+    box-shadow: none;
+    top: -2px;
+    left: 2px;
+    background-color: var(--bg);
+    color: var(--search_pink);
+    font-weight: 800;
+    border: 3px solid;
+    cursor: pointer;
 }
 
 @media (max-width: 800px) {

@@ -36,8 +36,8 @@ export function Signup() {
     <div className='overlay'></div>
     <div className='signup_container'>
     <p onClick={handleClose}>X</p>
-      <form onSubmit={handleSubmit}>
-        <p className='form_option' onClick={(e) => handleLoginForm(e)} style={{textAlign: 'center', margin: 0}} >Have a Account? Login.</p>
+      <form  className='form' onSubmit={handleSubmit}>
+        <p className='form_option' onClick={(e) => handleLoginForm(e)} style={{textAlign: 'center', margin: 0}} >Have an Account? Login.</p>
         <input id='firstName' placeholder='Enter your first name' value={firstName} onChange={(e) => { setFirstName(e.target.value) }}/>
         <input id='lastName' placeholder='Enter your last name' value={lastName} onChange={(e) => { setLastName(e.target.value) }}/>
         <input id='email' placeholder='Enter your E-Mail' value={email} onChange={(e) => { setEmail(e.target.value) }}/>

@@ -65,7 +65,8 @@ export function UserWatchlist({watchlist}) {
         Authorization: localStorage.getItem('token'),
       }
     }
-    await client.post(url, config)
+    const response = await client.post(url, config)
+    console.log('watchlists like', response)
     setWatchlistLikes(watchlist.votes.length)
     getWatchlists()
     /* console.log(watchlist.votes) */

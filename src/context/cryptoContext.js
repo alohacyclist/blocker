@@ -9,9 +9,14 @@ export const CryptoContext = createContext();
 export const CryptoContextProvider = props => {
     
     const [currency, setCurrency] = useState('usd')
+    const [currencySymbol, setCurrencySymbol] = useState('$')
     const [user, setUser] = useState()
+    const [watchlists, setWatchlists] = useState([])
+
     const [userWatchlist, setUserWatchlist] = useState()
-    const [isLoading, setIsLoading] = useState(false)    
+    const [isLoading, setIsLoading] = useState(false)
+    const [searchPlaceholder, setSearchPlaceholder] = useState('')
+    const [searchStyle, setSearchStyle] = useState(styles.coin_search)
 
     const navigate = useNavigate()
 
@@ -44,12 +49,24 @@ export const CryptoContextProvider = props => {
             email,
             password,
           })
+          console.log('logged in', response)
           saveToken(response.data.token)
           setUser(response.data.user)
         } catch (err) {
           console.error(err)
         }
     }
+
+    const googleLogin = async (user, token) => {
+      try {
+        console.log('logged in with google:', user, token)
+        saveToken(token)
+        setUser(user)
+      } catch (err) {
+        console.error(err)
+      }
+  }
+
 
     const verify = async () => {
         try {
@@ -68,7 +85,10 @@ export const CryptoContextProvider = props => {
         verify()
     }, [])
 
-    const [watchlists, setWatchlists] = useState([])
+    useEffect(()=> {
+      setSymbolForCurrency()
+    }, [currency])
+
 
     const watchlist = async (userId) => {
       try {
@@ -104,12 +124,13 @@ export const CryptoContextProvider = props => {
     /* console.log('All Watchlists Data:', data) */
   }
 
-  const [searchPlaceholder, setSearchPlaceholder] = useState('')
-  const [searchStyle, setSearchStyle] = useState(styles.coin_search)
+
   
     // handle show of login and signup modals
     const [openLogin, setLogin] = useState(false)
     const [openSignup, setOpenSignup] = useState(false)
+    const [openForgotPassword, setOpenForgotPassword] = useState(false)
+
 
     // set prominent chart default to bitcoin
     const [coinSelect, setCoinSelect] = useState('bitcoin')
@@ -127,11 +148,24 @@ export const CryptoContextProvider = props => {
       return calculatePerformance.toFixed(3)
     }
 
+    // set currency symbol
+    const setSymbolForCurrency = () => {
+      if(currency === 'usd') setCurrencySymbol('$')
+      if(currency === 'eur') setCurrencySymbol('€')
+      if(currency === 'yen') setCurrencySymbol('¥')
+    }
+
+    const [ displayMessage, setDisplayMessage ] = useState('This a display Message from Context')
+
     const values = {
-        user, signup, login, currency, setCurrency, userWatchlist, setUser, handleSelect, coinSelect, setCoinSelect, 
-        watchlists, setWatchlists, watchlist, isLoading, setIsLoading, setUserWatchlist, navigate, openLogin, 
-        searchPlaceholder, setSearchPlaceholder, setLogin, openSignup, setOpenSignup, getWatchlists, 
-        coinPerformance, getUserWatchlist, searchStyle, setSearchStyle, editProfile, verify
+        user, signup, login, currency, setCurrency, userWatchlist, setUser, 
+        handleSelect, coinSelect, setCoinSelect, setCurrency, watchlists, 
+        setWatchlists, watchlist, isLoading, setIsLoading, setUserWatchlist, 
+        navigate, openLogin, googleLogin, currencySymbol, setCurrencySymbol, 
+        searchPlaceholder, setSearchPlaceholder, setLogin, openSignup, 
+        setOpenSignup, getWatchlists, displayMessage, setDisplayMessage,
+        coinPerformance, getUserWatchlist, searchStyle, setSearchStyle, 
+        editProfile, verify, openForgotPassword, setOpenForgotPassword
     }
 
     return (

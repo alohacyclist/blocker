@@ -34,21 +34,21 @@ const handleDelete = async (e, coin) => {
 
   return (
         <div className={styles.watchlist_coin_element}>
-            <div className={styles.watchlist_coin_element_header}>
+            <div className={styles.watchlist_coin_element_header} >
               <h2>{coinSymbol.toUpperCase()}</h2>
-              <button className={styles.remove_coin_btn} onClick={ (e) => handleDelete(e, coin._id) } ><RiDeleteBinLine/></button>
+              <button className={styles.remove_coin_btn} onClick={(e) => handleDelete(e, coin._id)} ><RiDeleteBinLine/></button>
             </div>
             <div className={styles.watchlist_coin_element_info}>
-              <p /* style={{borderBottom: 'none', backgroundColor: 'rgba(5, 0, 30, 1)'}} */>Added on {new Date(coin.addedAt).toLocaleDateString()}</p>
-              <p /* style={{color: 'rgba(5, 0, 31, 1)', backgroundColor: '#f79000'}} */>@ {coin.priceWhenAdded} {currency}</p>
+              <p>Added on {new Date(coin.addedAt).toLocaleDateString()}</p>
+              <p>@ {coin.priceWhenAdded} {currency}</p>
             </div>
             <div className={styles.watchlist_coin_element_info}>
-              <p /* style={{borderBottom: 'none', backgroundColor: 'rgba(5, 0, 30, 1)'}} */>Current Price</p>
-              <p /* style={{color: 'rgba(5, 0, 31, 1)', backgroundColor: '#f79000'}} */>{currentPrice} {currency}</p>
+              <p>Current Price</p>
+              <p>{currentPrice} {currency}</p>
             </div>
             <div className={styles.watchlist_coin_element_info}>
-              <p /* style={{borderBottom: 'none', backgroundColor: 'rgba(5, 0, 30, 1)'}} */>Coin Performance</p>
-              <p /* style={{color: 'rgba(5, 0, 31, 1)', backgroundColor: '#f79000'}} */>{coinPerformance(coin.priceWhenAdded, currentPrice)}%</p>
+              <p>Coin Performance</p>
+              <p>{coinPerformance(coin.priceWhenAdded, currentPrice)}%</p>
             </div>
         </div>
   )

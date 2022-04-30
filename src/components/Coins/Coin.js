@@ -10,25 +10,32 @@ import {CgPlayListAdd, CgPlayListCheck} from 'react-icons/cg'
 
 ChartJS.register(CategoryScale, LinearScale, LineElement, PointElement)
 
-export function Coin({coin}) {
+export function Coin({coin, 
+                      percentage1h,
+                      percentage24h,
+                      percentage7d,
+                      percentage14d,
+                      percentage30d,
+                      percentage200d,
+                      percentage1y}) {
 
-  const {handleSelect, currency, navigate, user} = useContext(CryptoContext)
+  const {handleSelect, currency, currencySymbol, navigate, user} = useContext(CryptoContext)
   const [chartData, setChartData] = useState([])
 
 // get coin chart data
 const getChartData = async () => {
-    const day = await coingecko.get(`/coins/${coin.id}/market_chart`, {
-      params: {
-        vs_currency: 'usd',
-        days: '1'
-      }
-  })
+    const day = await coingecko.get(`/coins/${coin.id}/market_chart?vs_currency=${currency}&days=7`)
   setChartData(day.data.prices)
 }
 
 useEffect(() => {
   getChartData()
+  /* checkTimeValue(time) */
 }, [])
+
+/* useEffect(()=>{
+  checkTimeValue(time)
+}, []) */
 
 const labels = chartData?.map(dataset =>  new Date(dataset[0]).toLocaleDateString())
 
@@ -65,11 +72,11 @@ const options = {
       },
       grid: {
         display: false,
-        drawBorder: false
+        drawBorder: true
       }
     }
   },
-  maintainAspectRatio: false,
+  maintainAspectRatio: true,
   lineHeightAnnotation: {
     always: false,
     hover: true,
@@ -117,10 +124,22 @@ const options = {
   return (
     <div className={styles.coin_element} onClick={(e) => {handleSelect(e, coin.id), window.scrollTo(0, 0)} } >
       <div>
-        <img src={coin.image} alt={coin.image} style={{width: '2rem'}} />
-        <p>{coin.id.charAt(0).toUpperCase() + coin.id.slice(1)}</p>
-        <p>{coin.current_price} {currency}</p>
-        <p>{coin.price_change_percentage_24h.toFixed(2)}%</p>
+        {console.log(coin)}
+        <div className={styles.coin_element_info_1} style={{display: 'flex', alignItems: 'center'}}>
+          <img src={coin.image} alt={coin.image} style={{width: '20px'}} className={styles.coin_element_info_1_icon} />
+          <p>{coin.id.charAt(0).toUpperCase() + coin.id.slice(1)}</p>
+        </div>
+        <div className={styles.coin_element_info_2} >
+          <p>{coin.current_price} {currencySymbol}</p>
+          {percentage1h && <p>{coin.price_change_percentage_1h_in_currency?.toFixed(2)}%</p>}
+          {percentage24h && <p>{coin.price_change_percentage_24h?.toFixed(2)}%</p>}
+          {percentage7d && <p>{coin.price_change_percentage_7d_in_currency?.toFixed(2)}%</p>}
+          {percentage14d && <p>{coin.price_change_percentage_14d_in_currency?.toFixed(2)}%</p>}
+          {percentage30d && <p>{coin.price_change_percentage_30d_in_currency?.toFixed(2)}%</p>}
+          {percentage200d && <p>{coin.price_change_percentage_200d_in_currency?.toFixed(2)}%</p>}
+          {percentage1y && <p>{coin.price_change_percentage_1y_in_currency?.toFixed(2)}%</p>}
+        </div>
+        
       </div>
       <div className={styles.chart}>
         {<Line data={formatedData} options={options} />}
@@ -129,7 +148,7 @@ const options = {
       <div className={styles.lastchild}>
         {user ? 
           renderAddCoin ? 
-            <button className={styles.add_watchlist_btn} style={{pointerEvents: 'none'}}><CgPlayListCheck/></button> : 
+            <button className={styles.add_watchlist_btn} style={{pointerEvents: 'true'}}><CgPlayListCheck/></button> : 
             <button onClick={(e) => addCoin(e)} className={styles.add_watchlist_btn}><CgPlayListAdd/></button> :
             null}
       </div>

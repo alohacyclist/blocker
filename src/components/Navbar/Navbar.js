@@ -8,7 +8,7 @@ import styles from '../Coins/Coin.module.css'
 
 export function Navbar() {
 
-  const { setLogin, setUser, setSearchPlaceholder, user, setSearchStyle } = useContext(CryptoContext)
+  const { setLogin, setUser, setSearchPlaceholder, user, setSearchStyle, navigate } = useContext(CryptoContext)
 
   const handleLoginForm = (e) => {
     e.preventDefault()
@@ -23,11 +23,8 @@ export function Navbar() {
     deleteToken()
     setUser(null)
     console.log('user logged out')
+    navigate('/')
   }
-
-/*   const iconHex = `&#x1F50E;`
-  const parser = new DOMParser();
-  const icon = parser.parseFromString(iconHex, "text/html").body.textContent; */
 
   return (
     <div>
@@ -36,7 +33,7 @@ export function Navbar() {
         <div className='header_login_profile'>
         {user ? 
           <Link to='/user/profile'><button className='nav_btn'><HiOutlineUser/></button></Link> : 
-          <button className='nav_btn' onClick={(e) => {handleLoginForm(e)}}><FiUnlock/></button>}
+          <button className='nav_btn' onClick={(e) => {navigate('/'), handleLoginForm(e)}}><FiUnlock/></button>}
         </div>
       </div>
       <nav>
@@ -44,7 +41,7 @@ export function Navbar() {
             <Link to='/'><button className='nav_btn'><FiHome/></button></Link>
             <Link to='/watchlist'><button className='nav_btn'><CgUserList/></button></Link>
         
-            <button className='nav_btn' onClick={() => {setSearchStyle(styles.coin_search_show), setSearchPlaceholder('Type to search for coins...') }}><VscSearch /></button>
+            <button className='nav_btn' onClick={() => {/* refactor to handlesearchstyle */setSearchStyle(styles.coin_search_show), setSearchPlaceholder('Type to search for coins...'), window.scrollTo(0, 0), navigate('/') }}><VscSearch /></button>
 
             {user ? 
               <Link to='/user/watchlist'><button onClick={() => {window.scrollTo(0, 0)}} className='nav_btn'><IoGlassesOutline/></button></Link> : null}
