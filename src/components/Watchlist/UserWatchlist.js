@@ -7,7 +7,7 @@ import {AiOutlineLike} from 'react-icons/ai'
 
 export function UserWatchlist({watchlist}) {
 
-  const {currency, setIsLoading, getWatchlists, coinPerformance} = useContext(CryptoContext)
+  const {currency, setIsLoading, getWatchlists, coinPerformance, user} = useContext(CryptoContext)
 
   const [select, setSelect] = useState(false)
   const [coins, setCoins] = useState([])
@@ -18,6 +18,7 @@ export function UserWatchlist({watchlist}) {
 
   const handleWatchlistSelect = async (e, watchlist_id) => {
     e.preventDefault()
+    if(!user) console.log('login or signup')
     if(select) {
       setSelect(false)
     } else {

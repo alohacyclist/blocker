@@ -27,8 +27,11 @@ export const CryptoContextProvider = props => {
     const signup = async (firstName, lastName, email, password) => {
         try {
             const response = await client.post('/auth/signup', {firstName, lastName, email, password})
-            console.log('signup data:', response.data)
-        } catch {
+            response.data.status ? 
+            // if user email in db and user status is true (verified)
+            setDisplayMessage('A user with this Email already exists.') : 
+            setDisplayMessage('Please check your Email to verify your account. Check your junk mail as well. Enjoy Blocker!')
+        } catch (err) {
           console.error(err)
         }
     }
@@ -124,8 +127,6 @@ export const CryptoContextProvider = props => {
     /* console.log('All Watchlists Data:', data) */
   }
 
-
-  
     // handle show of login and signup modals
     const [openLogin, setLogin] = useState(false)
     const [openSignup, setOpenSignup] = useState(false)
@@ -152,7 +153,7 @@ export const CryptoContextProvider = props => {
     const setSymbolForCurrency = () => {
       if(currency === 'usd') setCurrencySymbol('$')
       if(currency === 'eur') setCurrencySymbol('€')
-      if(currency === 'yen') setCurrencySymbol('¥')
+      if(currency === 'jpy') setCurrencySymbol('¥')
     }
 
     const [ displayMessage, setDisplayMessage ] = useState('This a display Message from Context')

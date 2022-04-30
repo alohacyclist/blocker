@@ -15,6 +15,22 @@
     background-color:  rgba(42, 26, 71, 0.7);
 }
 
+.forgot_container{
+    position: fixed;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    width: 380px;
+    height: 220px;
+    align-self: center;
+    box-shadow: 3px -3px 3.5px rgba(255,255,255,0.8), -1px 1px 5px rgba(255,255,255,0.8);
+    border-radius: 4px;
+    background-color:  rgba(42, 26, 71, 0.7);
+}
+
 /* #002630 BACKGROUDND */
 /* #a9e0d9 #8cedc8 #009560 #3bd5fd GREENISH */
 /* #e20c34 #bd4525 REDISH */
@@ -29,6 +45,13 @@
 }
 
 .signup_container > form {
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+    padding: 1.5rem;
+}
+
+.forgot_container > form {
     display: flex;
     flex-direction: column;
     gap: 2em;
@@ -58,8 +81,22 @@
     border-style: solid;
     display: flex;
     align-items: center;
+    margin: auto;
     justify-content: center;
-    width: 100px;
+    width: 120px;
+    padding: 15px;
+    transition: ease-in;
+}
+
+.forgot_form-btn {
+    font-size: 1.3rem;
+    border-radius: 4px;
+    border-style: solid;
+    display: flex;
+    align-items: center;
+    margin: .1em auto;
+    justify-content: center;
+    width: 220px;
     padding: 15px;
     transition: ease-in;
 }
@@ -69,8 +106,21 @@
     color: rgba(5, 0, 30, 1);
 }
 
+.forgot_form-btn:hover {
+    background-color: rgba(59, 213, 253, 1);
+    color: rgba(5, 0, 30, 1);
+}
+
 .form_option:hover {
     color: rgba(235, 248, 232, 1);
 }
 
-
+.display_message {
+    display: flex;
+    margin: auto;
+    text-align: center;
+    top: 50%;
+    transform: translate(0%, -50%);
+    font-size: 20px;
+    color: rgba(235, 248, 232, 1);
+}

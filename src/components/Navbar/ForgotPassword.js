@@ -36,14 +36,17 @@ export function ForgotPassword() {
     return ReactDOM.createPortal(
         <>
         <div className='overlay'></div>
-        <div className='signup_container'>
+        <div className='forgot_container' >
         <p onClick={handleClose}>X</p>
             {showForm && 
                 <form  className='form' onSubmit={handleSubmit}>
+
                     <input id='email' placeholder='Enter your E-Mail' value={email} onChange={(e) => { setEmail(e.target.value) }}/>
-                    <button>Request Password</button>
+                    <button className='forgot_form-btn'>Request Password</button>
                 </form>}
-            {showMessage && <p>{displayMessage}</p>}
+                <p className='form_option' style={{textAlign: 'center'}} onClick={() => {setLogin(true), setOpenForgotPassword(false)}}>Back to Login</p>
+
+            {showMessage && <div className='display_message' ><p>{displayMessage}</p></div>}
           </div>
           </>,
         document.getElementById('portal')

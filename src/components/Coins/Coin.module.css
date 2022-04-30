@@ -11,10 +11,10 @@
     --yellow: #f79000;
 }
 
-.chart {
-    width: 330px;
-    height: 6rem;
-}
+/* .top_chart {
+    display: flex;
+    margin: 0 auto;
+} */
 
 .top_chart_info_stack {
     display: flex;
@@ -103,15 +103,13 @@
 }
 
 .show_more_btn {
-    display: flex;
-    margin: auto;
+    margin: 1rem 2em;
     background-color: transparent;
     color: var(--background);
     border: 1px solid var(--background);
     border-radius: 4px;
     width: 90px;
     height: 35px; 
-    align-items: center;
     text-align: center;
 }
 

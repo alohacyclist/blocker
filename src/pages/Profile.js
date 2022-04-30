@@ -5,7 +5,7 @@ import {AiOutlineLike} from 'react-icons/ai'
 
 export function Profile() {
 
-    const { user, watchlist, userWatchlist, editProfile, navigate, verify } = useContext(CryptoContext)
+    const { user, watchlist, userWatchlist, editProfile, navigate, verify, displayMessage, setDisplayMessage } = useContext(CryptoContext)
 
     const [like, setLike] = useState('Likes')
     const [edit, setEdit] = useState(false)
@@ -14,11 +14,16 @@ export function Profile() {
     const [password, setPassword] = useState(user?.password)
     /* const [passwordRepeat, setPasswordRepeat] = useState('') */
 
+    const [showMessage, setShowMessage] = useState(false)
+
     const handleSubmit = (e) => {
         e.preventDefault()
         editProfile(email, password)
         setEdit(false)
+        setDisplayMessage('Changes saved.')
+        setShowMessage(true)
         navigate('/user/profile')
+        setTimeout(()=>{setShowMessage(false)}, 2000)
     }
 
     useState(async () => {
@@ -34,8 +39,10 @@ export function Profile() {
                 <label>{email}</label>
                 <input value={email} type='email' onChange={(e) => {setEmail(e.target.value)}}></input>
                 <input type='password' onChange={(e) => {setPassword(e.target.value)}} placeholder='Enter new password' ></input>
-                <button>Save</button>
+                <button className={styles.profile_btn}>Save</button>
             </form> : 
+            showMessage ? <div className={styles.profile_container_msg}>{displayMessage}</div> :
+
             <div className={styles.profile_container}>
                 <div style={{display:'flex', justifyContent: 'space-between'}}>
                     <h2 style={{color: 'rgba(235, 248, 232, 1)'}}>Welcome, {user?.firstName}</h2>
@@ -45,7 +52,7 @@ export function Profile() {
                 <div>
                     <p style={{color: 'rgba(235, 248, 232, 1)',backgroundColor: 'rgba(42, 26, 71, 1)', border: '2px solid #f79000', padding: '3px' }}>{user?.firstName} {user?.lastName}</p>
                 </div>                
-                <button style={{borderRadius: '1px'}} onClick={() => setEdit(true)}>Edit Profile</button>
+                <button className={styles.profile_btn} onClick={() => setEdit(true)}>Edit Profile</button>
             </div>
             }
             

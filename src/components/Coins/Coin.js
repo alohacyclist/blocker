@@ -124,7 +124,7 @@ const options = {
   return (
     <div className={styles.coin_element} onClick={(e) => {handleSelect(e, coin.id), window.scrollTo(0, 0)} } >
       <div>
-        {console.log(coin)}
+        {/* {console.log(coin)} */}
         <div className={styles.coin_element_info_1} style={{display: 'flex', alignItems: 'center'}}>
           <img src={coin.image} alt={coin.image} style={{width: '20px'}} className={styles.coin_element_info_1_icon} />
           <p>{coin.id.charAt(0).toUpperCase() + coin.id.slice(1)}</p>

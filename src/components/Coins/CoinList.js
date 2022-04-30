@@ -33,7 +33,7 @@ export function CoinList() {
 
   useEffect(() => {
     fetchCoins()
-  }, [])  
+  }, [page, currency])  
 
   useEffect(() => {
     let results = coinFilter.filter(coin => coin.name.toLowerCase().includes(coinSearch.toLowerCase()) || coin.symbol.toLowerCase().includes(coinSearch.toLowerCase()))
@@ -87,7 +87,6 @@ export function CoinList() {
         setPercentage24h(false),
         setPercentage1h(false),
         setPercentage7d(false),
-        setPercentage14d(false),
         setPercentage30d(false),
         setPercentage200d(false),
         setPercentage1y(false),
@@ -132,13 +131,17 @@ export function CoinList() {
   const handleNextPage = (e, page) => {
     e.preventDefault()
     setPage(page+1)
-    fetchCoins()
+  }
+
+  const handleLastPage = (e, page) => {
+    e.preventDefault()
+    setPage(page-1)
   }
 
   return (
-    <div style={{marginBottom: '60px'}}>
+    <div style={{display: 'flex', flexDirection:'column', marginBottom: '60px'}}>
       
-      <div className={styles.top_chart} > {<CoinChart />}</div>
+      <div className={styles.top_chart} /* style={{maxWidth: '500px', alignSelf: 'center' }} */ > {<CoinChart />}</div>
 
       <div>     
         <div className={styles.select_time_btn_container}>
@@ -153,7 +156,7 @@ export function CoinList() {
         <div className={styles.select_currency_btn_container}>
           <button onClick={() => setCurrency('usd')}>USD</button>
           <button onClick={() => setCurrency('eur')}>EUR</button>
-          <button onClick={() => setCurrency('yen')}>YEN</button>
+          <button onClick={() => setCurrency('jpy')}>YEN</button>
         </div>
       </div>
 
@@ -171,7 +174,16 @@ export function CoinList() {
         percentage30d={percentage30d}
         percentage200d={percentage200d}
         percentage1y={percentage1y}/>)} )}
-      <button className={styles.show_more_btn} onClick={(e) => handleNextPage(e, page)}>Show more</button>
+        {page != 1 ? 
+          <div style={{display: 'flex', textAlign: 'center', justifyContent: 'space-between'}}>
+            <button className={styles.show_more_btn} onClick={(e) => handleLastPage(e, page)}>Back</button>
+            <button className={styles.show_more_btn} onClick={(e) => handleNextPage(e, page)}>Next</button>
+          </div> :
+          <div style={{display: 'flex', textAlign: 'center', justifyContent: 'flex-end'}}>
+            <button className={styles.show_more_btn} onClick={(e) => handleNextPage(e, page)}>Next</button>
+          </div>
+          }
+      
     </div>
   )
 }

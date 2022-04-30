@@ -6,7 +6,7 @@ import ReactDom from "react-dom";
 
 export function Signup() {
 
-  const { signup, openSignup, setOpenSignup, setLogin } = useContext(CryptoContext)
+  const { signup, openSignup, setOpenSignup, setLogin, displayMessage, setDisplayMessage } = useContext(CryptoContext)
 
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
@@ -14,13 +14,17 @@ export function Signup() {
   const [password, setPassword] = useState('')
   const [passwordRepeat, setPasswordRepeat] = useState('')
 
+  const [showForm, setShowForm] = useState(true)
+  const [showMessage, setShowMessage] = useState(false)
+
   if(!openSignup) return null
 
   const handleSubmit = (e) => {
     e.preventDefault()
     signup(firstName, lastName, email, password)
-    setOpenSignup(false)
-    setLogin(true)
+    setShowForm(false)
+    setShowMessage(true)
+    setTimeout(() => {setOpenSignup(false)}, 4000)
   }
 
   const handleLoginForm = (e) => {
@@ -36,15 +40,17 @@ export function Signup() {
     <div className='overlay'></div>
     <div className='signup_container'>
     <p onClick={handleClose}>X</p>
+    {showForm &&       
       <form  className='form' onSubmit={handleSubmit}>
-        <p className='form_option' onClick={(e) => handleLoginForm(e)} style={{textAlign: 'center', margin: 0}} >Have an Account? Login.</p>
-        <input id='firstName' placeholder='Enter your first name' value={firstName} onChange={(e) => { setFirstName(e.target.value) }}/>
-        <input id='lastName' placeholder='Enter your last name' value={lastName} onChange={(e) => { setLastName(e.target.value) }}/>
-        <input id='email' placeholder='Enter your E-Mail' value={email} onChange={(e) => { setEmail(e.target.value) }}/>
-        <input id='password' type='password' placeholder='Enter Password' value={password} onChange={(e) => { setPassword(e.target.value) }}/>
-        <input id='passwordRepeat' type='password' placeholder='Repeat Password' value={passwordRepeat} onChange={(e) => { setPasswordRepeat(e.target.value) } }/>
-        <button>Signup</button>
-      </form>
+          <p className='form_option' onClick={(e) => handleLoginForm(e)} style={{textAlign: 'center', margin: 0}} >Have an Account? Login.</p>
+          <input id='firstName' placeholder='Enter your first name' value={firstName} onChange={(e) => { setFirstName(e.target.value) }}/>
+          <input id='lastName' placeholder='Enter your last name' value={lastName} onChange={(e) => { setLastName(e.target.value) }}/>
+          <input id='email' placeholder='Enter your E-Mail' value={email} onChange={(e) => { setEmail(e.target.value) }}/>
+          <input id='password' type='password' placeholder='Enter Password' value={password} onChange={(e) => { setPassword(e.target.value) }}/>
+          <input id='passwordRepeat' type='password' placeholder='Repeat Password' value={passwordRepeat} onChange={(e) => { setPasswordRepeat(e.target.value) } }/>
+          <button className='form-btn'>Signup</button>
+        </form>}
+      {showMessage && <div className='display_message' ><p>{displayMessage}</p></div>}
       </div>
       </>,
     document.getElementById('portal')

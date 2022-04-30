@@ -75,6 +75,7 @@ const options = {
     }
   },
   maintainAspectRatio: true,
+  responsive: true,
   lineHeightAnnotation: {
     always: false,
     hover: true,

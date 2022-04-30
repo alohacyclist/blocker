@@ -54,9 +54,9 @@ export function SetNewPassword() {
                 <form  className='form' onSubmit={handleSubmit}>
                     <input id='password' type='password' placeholder='Enter new Password' value={password} onChange={(e) => { setPassword(e.target.value) }}/>
                     <input id='password-repeat' type='password' placeholder='Repeat new Password' value={repeatPassword} onChange={(e) => { setRepeatPassword(e.target.value) }}/>
-                    <button>Save Password</button>
+                    <button className='forgot_form-btn' >Save Password</button>
                 </form>}
-            {showMessage && <p>{displayMessage}</p>}
+            {showMessage && <div className='display_message' ><p>{displayMessage}</p></div>}
           </div>
           </>,
         document.getElementById('portal')
