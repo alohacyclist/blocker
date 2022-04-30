@@ -156,7 +156,7 @@ export const CryptoContextProvider = props => {
       if(currency === 'jpy') setCurrencySymbol('¥')
     }
 
-    const [ displayMessage, setDisplayMessage ] = useState('This a display Message from Context')
+    const [ displayMessage, setDisplayMessage ] = useState('')
 
     const values = {
         user, signup, login, currency, setCurrency, userWatchlist, setUser, 

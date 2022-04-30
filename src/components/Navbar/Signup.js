@@ -23,8 +23,9 @@ export function Signup() {
     e.preventDefault()
     signup(firstName, lastName, email, password)
     setShowForm(false)
+    setDisplayMessage('Check your Mail to verify your account.')
     setShowMessage(true)
-    setTimeout(() => {setOpenSignup(false)}, 4000)
+    setTimeout(() => {setOpenSignup(false), setShowMessage(false), setShowForm(true)}, 4000)
   }
 
   const handleLoginForm = (e) => {
