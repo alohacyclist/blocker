@@ -1,12 +1,12 @@
 nav {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
     position: fixed;
     bottom: 0;
     width: 100%;
     height: 3.5rem;
     background-color: rgba(42, 26, 71, 1);
-    overflow: hidden;
+    /* overflow: hidden; */
     z-index: 100;
 }
 
