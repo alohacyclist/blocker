@@ -29,6 +29,19 @@ nav {
     font-size: 2rem;
 }
 
+.nav_btn_active {
+    background-color: transparent;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
+    margin: 15px;
+    color: rgba(235, 248, 232, 1);
+    text-shadow: 2px 2px 5px rgba(235, 248, 232, .5);
+    font-size: 2rem;
+}
+
 .header {
     display: flex;
     height: 3.5rem;
