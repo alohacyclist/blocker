@@ -73,7 +73,7 @@ export const CryptoContextProvider = props => {
 
     const verify = async () => {
         try {
-            const response = await client.get('/auth/verify')
+            const response = await client.post('/auth/verify')
             setUser(response?.data?.user)
             console.log('user verified!')
             console.log('verify response user data:', response.data.user)
