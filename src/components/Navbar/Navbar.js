@@ -32,7 +32,7 @@ export function Navbar() {
         <img className='logo' src={logo} style={{height: '3rem', margin: '5px'}}/>
         <div className='header_login_profile'>
         {user ? 
-          <Link to='/user/profile'><button className='nav_btn'><HiOutlineUser/></button></Link> : 
+          <button className='nav_btn' onClick={(e) => navigate('/user/profile')}><HiOutlineUser/></button>: 
           <button className='nav_btn' onClick={(e) => {navigate('/'), handleLoginForm(e)}}><FiUnlock/></button>}
         </div>
       </div>
