@@ -33,10 +33,6 @@ useEffect(() => {
   /* checkTimeValue(time) */
 }, [])
 
-/* useEffect(()=>{
-  checkTimeValue(time)
-}, []) */
-
 const labels = chartData?.map(dataset =>  new Date(dataset[0]).toLocaleDateString())
 
 const formatedData = {
