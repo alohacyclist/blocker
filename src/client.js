@@ -9,5 +9,3 @@ client.interceptors.request.use((request) => {
   if (token) request.headers.Authorization = token
   return request
 })
-
-console.log(process.env.REACT_APP_BACKEND_URL)

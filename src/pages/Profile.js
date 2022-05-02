@@ -35,7 +35,7 @@ export function Profile() {
     return (
         <div>
             {edit ? 
-            <form  className={styles.profile_container} onSubmit={handleSubmit}>
+            <form  className={styles.profile_container} onSubmit={(e) => handleSubmit(e)}>
                 <label>{email}</label>
                 <input value={email} type='email' onChange={(e) => {setEmail(e.target.value)}}></input>
                 <input type='password' onChange={(e) => {setPassword(e.target.value)}} placeholder='Enter new password' ></input>
