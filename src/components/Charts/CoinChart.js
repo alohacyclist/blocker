@@ -91,7 +91,7 @@ const options = {
             <h2>{chartInfo?.symbol.toUpperCase()}</h2>
           </div>
           
-          <div>
+          <div className={styles.main_chart}>
             {<Line data={formatedData} options={options} />}
           </div>
             

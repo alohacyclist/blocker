@@ -24,7 +24,7 @@ nav {
     cursor: pointer;
     overflow: hidden;
     outline: none;
-    margin: 15px;
+    margin: 10px;
     color: rgba(59, 213, 253, 1);
     font-size: 2rem;
 }
@@ -36,14 +36,13 @@ nav {
     cursor: pointer;
     overflow: hidden;
     outline: none;
-    margin: 15px;
+    margin: 10px;
     color: rgba(235, 248, 232, 1);
     text-shadow: 2px 2px 5px rgba(235, 248, 232, .5);
     font-size: 2rem;
 }
 
 .header {
-    display: flex;
     height: 3.5rem;
     background-color: rgba(42, 26, 71, 1);
 }

@@ -141,9 +141,7 @@ export function CoinList() {
   return (
     <div style={{display: 'flex', flexDirection:'column', marginBottom: '60px'}}>
       
-      <div className={styles.top_chart} /* style={{maxWidth: '500px', alignSelf: 'center' }} */ > {<CoinChart />}</div>
-
-      <div>     
+      <div className={styles.chart_container}>      
         <div className={styles.select_time_btn_container}>
           <button onClick={(e) => handleTimePricePercentage(e, '1h')}>1h</button>
           <button onClick={(e) => handleTimePricePercentage(e, '1d')}>24h</button>
@@ -158,7 +156,11 @@ export function CoinList() {
           <button onClick={() => setCurrency('eur')}>EUR</button>
           <button onClick={() => setCurrency('jpy')}>YEN</button>
         </div>
+        {<CoinChart />}
+
       </div>
+
+
 
 
       <div className={styles.coin_search_container} >
