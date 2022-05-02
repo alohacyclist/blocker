@@ -37,7 +37,7 @@ export function Navbar() {
         </div>
       </div>
       <nav>
-        <div>
+        <div className='nav-icons-container'>
             <Link to='/'><button className='nav_btn'><FiHome/></button></Link>
             <Link to='/watchlist'><button className='nav_btn'><CgUserList/></button></Link>
         
