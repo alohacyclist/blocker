@@ -113,13 +113,13 @@ export function Navbar() {
       </div>
       <nav>
         <div className='nav-icons-container'>
-            <Link to='/'><button className={activeHomeBtn ? 'nav_btn_active' : 'nav_btn'} onClick={(e) => handleHomeBtn(e)}><FiHome/></button></Link>
-            <Link to='/watchlist'><button className={activeUserWatchlistBtn ? 'nav_btn_active' : 'nav_btn'}  onClick={(e) => handleUserWatchlistBtn(e)}><CgUserList/></button></Link>
+            <button className={activeHomeBtn ? 'nav_btn_active' : 'nav_btn'} onClick={(e) => {handleHomeBtn(e), navigate('/watchlist')}}><FiHome/></button>
+            <button className={activeUserWatchlistBtn ? 'nav_btn_active' : 'nav_btn'}  onClick={(e) => {handleUserWatchlistBtn(e), navigate('/watchlist')}}><CgUserList/></button>
         
             <button className={activeSearchBtn ? 'nav_btn_active' : 'nav_btn'} onClick={(e) => {handleSearchStyle(e), handleSearchBtn(e)}}><VscSearch /></button>
 
             {user ? 
-              <Link to='/user/watchlist'><button onClick={(e) => {window.scrollTo(0, 0), handleWatchlistBtn(e)}} className={activeWatchlistBtn ? 'nav_btn_active' : 'nav_btn'} ><IoGlassesOutline/></button></Link> : null}
+              <button onClick={(e) => {navigate('/user/watchlist'), window.scrollTo(0, 0), handleWatchlistBtn(e)}} className={activeWatchlistBtn ? 'nav_btn_active' : 'nav_btn'} ><IoGlassesOutline/></button></Link> : null}
             {user ? 
               <button className='nav_btn' onClick={() => {logout()}} ><MdOutlineLogout/></button> : null}
         </div>
