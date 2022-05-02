@@ -78,7 +78,7 @@ export const CryptoContextProvider = props => {
             console.log('user verified!')
             console.log('verify response user data:', response.data.user)
             await watchlist(response?.data?.user._id)
-            navigate('/') // CHANGE TO USER WATCHLIST/PROFILE
+            /* navigate('/') */ // CHANGE TO USER WATCHLIST/PROFILE
         } catch {
             console.log('user not verified!')
         }
