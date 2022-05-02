@@ -85,6 +85,7 @@ export const CryptoContextProvider = props => {
     }
 
     useEffect(() => {
+      user ? null :
         verify()
     }, [])
 
