@@ -66,9 +66,10 @@ export const CryptoContextProvider = props => {
           console.log('logged in', response)
           saveToken(response.data.token)
           setUser(response.data.user)
+          setDisplayMessage('Enjoy Blocker.')
         } catch (err) {
-          console.error(err)
           setDisplayMessage('Email or password incorrect. Make sure to verify your account after signing up. Click the link in the email we sent you. Check junk mail, too.')
+          console.error(err)
         }
     }
 
