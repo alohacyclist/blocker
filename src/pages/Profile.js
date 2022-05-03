@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react'
 import { CryptoContext } from '../context/cryptoContext'
 import styles from './Pages.module.css'
 import {AiOutlineLike} from 'react-icons/ai'
+import { client } from '../client'
 
 export function Profile() {
 
