@@ -6,7 +6,7 @@ import {GgleLogin} from './GgleLogin';
 export function Login() {
 
   const { login, openLogin, navigate, setLogin, setOpenSignup, 
-          setOpenForgotPassword, displayMessage, setDisplayMessage } = useContext(CryptoContext)
+          setOpenForgotPassword, displayMessage, setDisplayMessage, user } = useContext(CryptoContext)
 
   const [mail, setMail] = useState('');
   const [password, setPassword] = useState('');
@@ -18,6 +18,7 @@ export function Login() {
   const handleSubmit = (e) => {
     e.preventDefault()
     login(mail, password)
+    user ? setDisplayMessage('Enjoy BLOCKER') : setDisplayMessage('Invalid email or password. Ensure you have verified your account in the mail we sent you.')
     setShowForm(false)
     setTimeout(() => {setLogin(false), setShowForm(true), setDisplayMessage(''), navigate('/')}, 3000)
   }
