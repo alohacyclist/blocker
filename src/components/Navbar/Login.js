@@ -15,9 +15,9 @@ export function Login() {
 
   if(!openLogin) return null
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    login(mail, password)
+    await login(mail, password)
     setShowForm(false)
     setTimeout(() => {setLogin(false), setShowForm(true), setDisplayMessage(''), navigate('/')}, 3000)
   }
