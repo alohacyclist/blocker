@@ -225,13 +225,13 @@ export function CoinList() {
       
       <div className={styles.chart_container}>   
         <div className={styles.select_btns_wrapper}>
-            <button  className={active1yBtn ? styles.select_btn_active : styles.select_btn} onClick={(e) => {handleTimePricePercentage(e, '1y'), setActive1yBtn(true)}}>1y</button>
             <button  className={active1hBtn ? styles.select_btn_active : styles.select_btn} onClick={(e) => handleTimePricePercentage(e, '1h')}>1h</button>
             <button  className={active1dBtn ? styles.select_btn_active : styles.select_btn} onClick={(e) => handleTimePricePercentage(e, '1d')}>24h</button>
             <button  className={active7dBtn ? styles.select_btn_active : styles.select_btn} onClick={(e) => handleTimePricePercentage(e, '7d')}>7d</button>
             <button  className={active14dBtn ? styles.select_btn_active : styles.select_btn} onClick={(e) => handleTimePricePercentage(e, '14d')}>14d</button>
             <button  className={active30dBtn ? styles.select_btn_active : styles.select_btn} onClick={(e) => handleTimePricePercentage(e, '30d')}>30d</button>
             <button  className={active200dBtn ? styles.select_btn_active : styles.select_btn} onClick={(e) => handleTimePricePercentage(e, '200d')}>200d</button>
+            <button  className={active1yBtn ? styles.select_btn_active : styles.select_btn} onClick={(e) => {handleTimePricePercentage(e, '1y'), setActive1yBtn(true)}}>1y</button>
 
             <button className={activeUsdBtn ? 'select_btn_active' : 'select_btn'} onClick={() => setCurrency('usd')}>USD</button>
             <button className={activeEurBtn ? 'select_btn_active' : 'select_btn'} onClick={() => setCurrency('eur')}>EUR</button>
