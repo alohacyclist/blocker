@@ -1,5 +1,4 @@
 import React, { useContext, useState } from 'react'
-import { Link } from 'react-router-dom'
 import { CryptoContext } from '../../context/cryptoContext'
 import './Navbar.css'
 import {IoGlassesOutline, FiHome, HiOutlineUser, MdOutlineLogout, CgUserList, FiUnlock, VscSearch} from 'react-icons/all'

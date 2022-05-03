@@ -39,8 +39,13 @@ export function Profile() {
         console.log(response.data)
         setDisplayMessage('')
         setDeleteAccountConfirmation(false)
+        deleteToken()
         navigate('/')
     }
+
+    const deleteToken = () => {
+        localStorage.removeItem('token')
+      }
 
     useState(async () => {
         verify()
@@ -75,7 +80,7 @@ export function Profile() {
                 {deleteAccountConfirmation && 
                 <div className={styles.profile_container_msg}>
                     {displayMessage}
-                    <button onClick={() => handleDeleteUser()}>DELETE</button>
+                    <button className={styles.profile_btn} onClick={() => handleDeleteUser()}>DELETE</button>
                 </div>}
             </div>
             }
