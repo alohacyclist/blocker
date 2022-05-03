@@ -94,7 +94,9 @@
 }
 
 .show_more_btn {
-    margin: 1rem 2em;
+    margin-left: 2em;
+    margin-right: 2em;
+    margin-bottom: 6em;
     background-color: transparent;
     color: var(--background);
     border: 1px solid var(--background);
@@ -102,6 +104,7 @@
     width: 90px;
     height: 35px; 
     text-align: center;
+    position: relative;
 }
 
 .coin_search {
@@ -244,7 +247,7 @@
 .coin_list {
     display: flex;
     flex-direction: column;
-    margin-bottom: 60px;
+    margin-bottom: 20px;
 }
 
 .select_btns_wrapper {
@@ -291,6 +294,10 @@ button {
         flex-direction: row;
         flex-wrap: wrap;
         justify-content: center;
+    }
+    .show_more_btn {
+        margin-left: 3em;
+        margin-right: 3em;
     }
 }
 

@@ -246,8 +246,9 @@ export function CoinList() {
         <input className={searchStyle} value={coinSearch} onChange={(e) => setCoinSearch(e.target.value)} placeholder={searchPlaceholder} />
       </div>
       
-      <div className={styles.coin_list}>
       {isLoading? 'Loading...' : null }
+
+      <div className={styles.coin_list}>
 
       {coinList.map((coin) => {return (<Coin key={coin.id} coin={coin}
         percentage1h={percentage1h}
@@ -260,11 +261,11 @@ export function CoinList() {
         </div>
 
         {page != 1 ? 
-          <div style={{display: 'flex', textAlign: 'center', justifyContent: 'space-between'}}>
+          <div style={{display: 'flex', textAlign: 'center', justifyContent: 'space-evenly'}}>
             <button className={styles.show_more_btn} onClick={(e) => handleLastPage(e, page)}>Back</button>
             <button className={styles.show_more_btn} onClick={(e) => handleNextPage(e, page)}>Next</button>
           </div> :
-          <div style={{display: 'flex', textAlign: 'center', justifyContent: 'flex-end'}}>
+          <div style={{display: 'flex', textAlign: 'center', justifyContent: 'center'}}>
             <button className={styles.show_more_btn} onClick={(e) => handleNextPage(e, page)}>Next</button>
           </div>
           }
