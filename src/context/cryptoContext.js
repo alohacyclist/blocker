@@ -56,6 +56,7 @@ export const CryptoContextProvider = props => {
           saveToken(response.data.token)
           setUser(response.data.user)
         } catch (err) {
+          console.log('wrong login:', response.status)
           console.error(err)
         }
     }

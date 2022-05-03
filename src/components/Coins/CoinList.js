@@ -139,23 +139,26 @@ export function CoinList() {
   }
 
   return (
-    <div style={{display: 'flex', flexDirection:'column', marginBottom: '60px'}}>
+    <div>
       
-      <div className={styles.chart_container}>      
-        <div className={styles.select_time_btn_container}>
-          <button onClick={(e) => handleTimePricePercentage(e, '1h')}>1h</button>
-          <button onClick={(e) => handleTimePricePercentage(e, '1d')}>24h</button>
-          <button onClick={(e) => handleTimePricePercentage(e, '7d')}>7d</button>
-          <button onClick={(e) => handleTimePricePercentage(e, '14d')}>14d</button>
-          <button onClick={(e) => handleTimePricePercentage(e, '30d')}>30d</button>
-          <button onClick={(e) => handleTimePricePercentage(e, '200d')}>200d</button>
-          <button onClick={(e) => handleTimePricePercentage(e, '1y')}>1y</button>
-        </div> 
-        <div className={styles.select_currency_btn_container}>
-          <button onClick={() => setCurrency('usd')}>USD</button>
-          <button onClick={() => setCurrency('eur')}>EUR</button>
-          <button onClick={() => setCurrency('jpy')}>YEN</button>
-        </div>
+      <div className={styles.chart_container}>   
+        <div className={styles.select_btns_wrapper}>
+          {/* <div className={styles.select_time_btn_container}> */}
+            <button onClick={(e) => handleTimePricePercentage(e, '1h')}>1h</button>
+            <button onClick={(e) => handleTimePricePercentage(e, '1d')}>24h</button>
+            <button onClick={(e) => handleTimePricePercentage(e, '7d')}>7d</button>
+            <button onClick={(e) => handleTimePricePercentage(e, '14d')}>14d</button>
+            <button onClick={(e) => handleTimePricePercentage(e, '30d')}>30d</button>
+            <button onClick={(e) => handleTimePricePercentage(e, '200d')}>200d</button>
+            <button onClick={(e) => handleTimePricePercentage(e, '1y')}>1y</button>
+          {/* </div>  */}
+          {/* <div className={styles.select_currency_btn_container}> */}
+            <button onClick={() => setCurrency('usd')}>USD</button>
+            <button onClick={() => setCurrency('eur')}>EUR</button>
+            <button onClick={() => setCurrency('jpy')}>YEN</button>
+          {/* </div>   */}
+        </div>   
+
         {<CoinChart />}
 
       </div>
@@ -167,7 +170,9 @@ export function CoinList() {
         <input className={searchStyle} value={coinSearch} onChange={(e) => setCoinSearch(e.target.value)} placeholder={searchPlaceholder} />
       </div>
       
+      <div className={styles.coin_list}>
       {isLoading? 'Loading...' : null }
+
       {coinList.map((coin) => {return (<Coin key={coin.id} coin={coin}
         percentage1h={percentage1h}
         percentage24h={percentage24h}
@@ -176,6 +181,8 @@ export function CoinList() {
         percentage30d={percentage30d}
         percentage200d={percentage200d}
         percentage1y={percentage1y}/>)} )}
+        </div>
+
         {page != 1 ? 
           <div style={{display: 'flex', textAlign: 'center', justifyContent: 'space-between'}}>
             <button className={styles.show_more_btn} onClick={(e) => handleLastPage(e, page)}>Back</button>
@@ -185,7 +192,6 @@ export function CoinList() {
             <button className={styles.show_more_btn} onClick={(e) => handleNextPage(e, page)}>Next</button>
           </div>
           }
-      
     </div>
   )
 }

@@ -108,7 +108,7 @@ export function Navbar() {
         <div className='header_login_profile'>
         {user ? 
           <button className={activeProfileBtn ? 'nav_btn_active' : 'nav_btn'} onClick={(e) => {navigate('/user/profile'), handleProfileBtn(e)}}><HiOutlineUser/></button> : 
-          <button className={activeLoginBtn ? 'nav_btn_active' : 'nav_btn'} onClick={(e) => {handleLoginForm(e), handleLoginBtn(e)}}><FiUnlock/></button>}
+          <button className={activeLoginBtn ? 'nav_btn_active' : 'nav_btn'} onClick={(e) => {handleLoginForm(e), handleLoginBtn(e), navigate('/')}}><FiUnlock/></button>}
         </div>
       </div>
       <nav>
