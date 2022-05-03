@@ -15,6 +15,7 @@ export function Profile() {
     /* const [passwordRepeat, setPasswordRepeat] = useState('') */
 
     const [showMessage, setShowMessage] = useState(false)
+    const [deleteAccountConfirmation, setDeleteAccountConfirmation] = useState(false)
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -24,6 +25,20 @@ export function Profile() {
         setShowMessage(true)
         navigate('/user/profile')
         setTimeout(()=>{setShowMessage(false)}, 2000)
+    }
+
+    const handleDeleteUserClick = (e) => {
+        e.preventDefault()
+        setDisplayMessage('Are you sure you want to delete your account?')
+        setDeleteAccountConfirmation(true)
+    }
+
+    const handleDeleteUser = async () => {
+        const response = await client.post('/auth/delete', {user})
+        console.log(response.data)
+        setDisplayMessage('')
+        setDeleteAccountConfirmation(false)
+        navigate('/')
     }
 
     useState(async () => {
@@ -51,8 +66,16 @@ export function Profile() {
                 <p style={{backgroundColor: 'rgba(226, 41, 120, 1)', border: '2px solid #f79000', padding: '3px' }} >{user?.email}</p>
                 <div>
                     <p style={{color: 'rgba(235, 248, 232, 1)',backgroundColor: 'rgba(42, 26, 71, 1)', border: '2px solid #f79000', padding: '3px' }}>{user?.firstName} {user?.lastName}</p>
-                </div>                
-                <button className={styles.profile_btn} onClick={() => setEdit(true)}>Edit Profile</button>
+                </div>     
+                <div>
+                    <button className={styles.profile_btn} onClick={() => setEdit(true)}>Edit Profile</button>
+                    <button className={styles.profile_btn} onClick={(e) => handleDeleteUserClick(e)}>Delete Account</button>
+                </div>           
+                {deleteAccountConfirmation && 
+                <div className={styles.profile_container_msg}>
+                    {displayMessage}
+                    <button onClick={() => handleDeleteUser()}>DELETE</button>
+                </div>}
             </div>
             }
             
