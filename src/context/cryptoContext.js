@@ -8,17 +8,27 @@ export const CryptoContext = createContext();
 
 export const CryptoContextProvider = props => {
     
-    const [currency, setCurrency] = useState('usd')
-    const [currencySymbol, setCurrencySymbol] = useState('$')
-    const [user, setUser] = useState()
-    const [watchlists, setWatchlists] = useState([])
+  const [currency, setCurrency] = useState('usd')
+  const [currencySymbol, setCurrencySymbol] = useState('$')
+  const [user, setUser] = useState()
+  const [watchlists, setWatchlists] = useState([])
+  
+  const [userWatchlist, setUserWatchlist] = useState()
+  const [isLoading, setIsLoading] = useState(false)
+  const [searchPlaceholder, setSearchPlaceholder] = useState('')
+  const [searchStyle, setSearchStyle] = useState(styles.coin_search)
+  const [displayMessage, setDisplayMessage ] = useState('')
 
-    const [userWatchlist, setUserWatchlist] = useState()
-    const [isLoading, setIsLoading] = useState(false)
-    const [searchPlaceholder, setSearchPlaceholder] = useState('')
-    const [searchStyle, setSearchStyle] = useState(styles.coin_search)
-
-    const navigate = useNavigate()
+  // handle show of login and signup modals
+  const [openLogin, setLogin] = useState(false)
+  const [openSignup, setOpenSignup] = useState(false)
+  const [openForgotPassword, setOpenForgotPassword] = useState(false)
+  
+  // set prominent chart default to bitcoin
+  const [coinSelect, setCoinSelect] = useState('bitcoin')
+    
+  const navigate = useNavigate()
+  
 
     const saveToken = (token) => {
         localStorage.setItem('token', `Bearer ${token}`);
@@ -33,6 +43,7 @@ export const CryptoContextProvider = props => {
             setDisplayMessage('Please check your Email to verify your account. Check your junk mail as well. Enjoy Blocker!')
         } catch (err) {
           console.error(err)
+          setDisplayMessage('Sorry, we could not sign you up. Try again or come back later.')
         }
     }
 
@@ -56,9 +67,8 @@ export const CryptoContextProvider = props => {
           saveToken(response.data.token)
           setUser(response.data.user)
         } catch (err) {
-          console.log('wrong login:', 
-          response.status)
           console.error(err)
+          setDisplayMessage('Email or password incorrect. Make sure to verify your account after signing up. Click the link in the email we sent you. Check junk mail, too.')
         }
     }
 
@@ -130,15 +140,6 @@ export const CryptoContextProvider = props => {
     /* console.log('All Watchlists Data:', data) */
   }
 
-    // handle show of login and signup modals
-    const [openLogin, setLogin] = useState(false)
-    const [openSignup, setOpenSignup] = useState(false)
-    const [openForgotPassword, setOpenForgotPassword] = useState(false)
-
-
-    // set prominent chart default to bitcoin
-    const [coinSelect, setCoinSelect] = useState('bitcoin')
-
     const handleSelect = (e, coin) => {
         e.preventDefault()
         setCoinSelect(coin)
@@ -158,8 +159,6 @@ export const CryptoContextProvider = props => {
       if(currency === 'eur') setCurrencySymbol('€')
       if(currency === 'jpy') setCurrencySymbol('¥')
     }
-
-    const [ displayMessage, setDisplayMessage ] = useState('')
 
     const values = {
         user, signup, login, currency, setCurrency, userWatchlist, setUser, 

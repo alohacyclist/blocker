@@ -5,18 +5,21 @@ import {GgleLogin} from './GgleLogin';
 
 export function Login() {
 
-  const { login, openLogin, navigate, setLogin, setOpenSignup, setOpenForgotPassword } = useContext(CryptoContext)
+  const { login, openLogin, navigate, setLogin, setOpenSignup, 
+          setOpenForgotPassword, displayMessage, setDisplayMessage } = useContext(CryptoContext)
 
   const [mail, setMail] = useState('');
   const [password, setPassword] = useState('');
+
+  const [showForm, setShowForm] = useState(true)
 
   if(!openLogin) return null
 
   const handleSubmit = (e) => {
     e.preventDefault()
     login(mail, password)
-    setLogin(false)
-    navigate('/')
+    setShowForm(false)
+    setTimeout(() => {setLogin(false), setShowForm(true), setDisplayMessage(''), navigate('/')}, 3000)
   }
 
   const handleClose = () => {setLogin(false)}
@@ -36,25 +39,27 @@ export function Login() {
   return ReactDOM.createPortal(
     <>
     <div className='overlay'></div>
+
     <div className='signup_container'>
     <p onClick={handleClose} >X</p>
-      
+    {showForm ? 
     <form className='form' onSubmit={handleSubmit}>    
-      <input id='mail' value={mail} onChange={(e) => { setMail(e.target.value) }} placeholder='Enter your E-Mail'/>
-      <input id='password' type='password' value={password} onChange={(e) => { setPassword(e.target.value) }} placeholder='Enter Password'/>
+    <input id='mail' value={mail} onChange={(e) => { setMail(e.target.value) }} placeholder='Enter your E-Mail'/>
+    <input id='password' type='password' value={password} onChange={(e) => { setPassword(e.target.value) }} placeholder='Enter Password'/>
 
-        <p className='form_option' onClick={(e) => handleSignupForm(e)} style={{textAlign: 'center', margin: 0}} >No Account? Sign up for free now!</p>
-        <p className='form_option' onClick={(e) => handleForgotPassword(e)} style={{textAlign: 'center', margin: 0}} >Forgot Password?</p>
+      <p className='form_option' onClick={(e) => handleSignupForm(e)} style={{textAlign: 'center', margin: 0}} >No Account? Sign up for free now!</p>
+      <p className='form_option' onClick={(e) => handleForgotPassword(e)} style={{textAlign: 'center', margin: 0}} >Forgot Password?</p>
 
 
-      <div className='login-options'>
+    <div className='login-options'>
       <button className='form-btn'>
-      Login
+        Login
       </button>
-        <GgleLogin />
-      </div>
-      
-    </form>
+      <GgleLogin />
+    </div>
+  </form> : 
+  <p className='display_message'>{displayMessage}</p>}
+    
     </div>
     
     </>
