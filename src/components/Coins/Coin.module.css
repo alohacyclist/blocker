@@ -169,11 +169,13 @@
 .watchlist_coin_container_wrapper {
     display: flex;
     flex-direction: column;
+    justify-content: center;
 }
 
 .watchlist_coin_container {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     /* border: 1px solid var(--text); */
 }
 
