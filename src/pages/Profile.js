@@ -35,12 +35,13 @@ export function Profile() {
     }
 
     const handleDeleteUser = async () => {
+        deleteToken()
+        navigate('/')
         const response = await client.post('/auth/delete', {user})
         console.log(response.data)
         setDisplayMessage('')
         setDeleteAccountConfirmation(false)
-        deleteToken()
-        navigate('/')
+        console.log('delete complete')
     }
 
     const deleteToken = () => {

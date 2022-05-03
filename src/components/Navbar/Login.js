@@ -18,9 +18,9 @@ export function Login() {
   const handleSubmit = (e) => {
     e.preventDefault()
     login(mail, password)
-    user ? setDisplayMessage('Enjoy BLOCKER') : setDisplayMessage('Invalid email or password. Ensure you have verified your account in the mail we sent you.')
+    user ? setDisplayMessage('Enjoy BLOCKER') : setTimeout(()=> setDisplayMessage('Invalid email or password. Ensure you have verified your account in the mail we sent you.'), 500)
     setShowForm(false)
-    setTimeout(() => {setLogin(false), setShowForm(true), setDisplayMessage(''), navigate('/')}, 3000)
+    setTimeout(() => {setLogin(false), setShowForm(true), setDisplayMessage(''), navigate('/')}, 3500)
   }
 
   const handleClose = () => {setLogin(false)}

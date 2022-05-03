@@ -24,6 +24,7 @@
     flex-direction: column;
     gap: 1rem;
     text-align: center;
+    justify-content: center;
     /* border: 1px solid pink; */
     margin: 1rem;
     padding: 1rem;
@@ -31,7 +32,9 @@
 }
 
 .profile_btn {
-    width: 100px;
+    min-width: 120px;
+    max-width: 160px;
+    overflow: hidden;
     border-radius: 1px;
 }
 
