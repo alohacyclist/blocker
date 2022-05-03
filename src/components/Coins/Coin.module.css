@@ -65,11 +65,6 @@
     padding: 3px;
     flex-wrap: wrap;
 }
-@media only screen and (max-width: 425px) {
-    .coin_element_info_1_icon {
-        display: none;
-    }
-}
 
 .coin_element_info_2 {
     margin-top: 10px;
@@ -268,7 +263,7 @@
     justify-content: center;
 }
 
-.select_btns_wrapper > button {
+.select_btn {
     margin: 5px;
 }
 
@@ -293,3 +288,11 @@
     .coin_element > div {  overflow: hidden;  min-width: 50px; }
 }
 
+@media only screen and (max-width: 425px) {
+    .coin_element_info_1_icon {
+        display: none;
+    }
+    .top_chart_info_stack {
+        display: none;
+    }
+}

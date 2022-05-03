@@ -21,6 +21,17 @@ export function CoinList() {
   const [percentage30d, setPercentage30d] = useState(false)
   const [percentage200d, setPercentage200d] = useState(false)
   const [percentage1y, setPercentage1y] = useState(false)
+
+  const  [active1hBtn, setActive1hBtn] = useState(false)
+  const  [active1dBtn, setActive1dBtn] = useState(true)
+  const [active7dBtn, setActive7dBtn] = useState(false)
+  const [active14dBtn, setActive14dBtn] = useState(false)
+  const [active30dBtn, setActive30dBtn] = useState(false)
+  const [active200dBtn, setActive200dBtn] = useState(false)
+  const [activeUsdBtn, setActiveUsdBtn] = useState(false)
+  const [activeEurBtn, setActiveEurBtn] = useState(false)
+  const [activeJpyBtn, setActiveJpyBtn] = useState(false)
+  const [active1yBtn, setActive1yBtn]  = useState(false)
   
 
   const fetchCoins = async () => {
@@ -60,6 +71,16 @@ export function CoinList() {
         setPercentage30d(false),
         setPercentage200d(false),
         setPercentage1y(false),
+        setActive1dBtn(false),
+        setActive7dBtn(false),
+        setActive14dBtn(false),
+        setActive30dBtn(false),
+        setActive200dBtn(false),
+        setActiveUsdBtn(false),
+        setActiveEurBtn(false),
+        setActiveJpyBtn(false),
+        setActive1yBtn(false),
+        setActive1hBtn(true),
         console.log('1h')
         break;
       case '1d':
@@ -70,6 +91,16 @@ export function CoinList() {
         setPercentage30d(false),
         setPercentage200d(false),
         setPercentage1y(false),
+        setActive1dBtn(true),
+        setActive7dBtn(false),
+        setActive14dBtn(false),
+        setActive30dBtn(false),
+        setActive200dBtn(false),
+        setActiveUsdBtn(false),
+        setActiveEurBtn(false),
+        setActiveJpyBtn(false),
+        setActive1yBtn(false),
+        setActive1hBtn(false),
         console.log('24h')
         break;
       case '7d':
@@ -80,6 +111,16 @@ export function CoinList() {
         setPercentage30d(false),
         setPercentage200d(false),
         setPercentage1y(false),
+        setActive1dBtn(false),
+        setActive7dBtn(true),
+        setActive14dBtn(false),
+        setActive30dBtn(false),
+        setActive200dBtn(false),
+        setActiveUsdBtn(false),
+        setActiveEurBtn(false),
+        setActiveJpyBtn(false),
+        setActive1yBtn(false),
+        setActive1hBtn(false),
         console.log('7d')
         break;
       case '14d':
@@ -90,6 +131,16 @@ export function CoinList() {
         setPercentage30d(false),
         setPercentage200d(false),
         setPercentage1y(false),
+        setActive1dBtn(false),
+        setActive7dBtn(false),
+        setActive14dBtn(true),
+        setActive30dBtn(false),
+        setActive200dBtn(false),
+        setActiveUsdBtn(false),
+        setActiveEurBtn(false),
+        setActiveJpyBtn(false),
+        setActive1yBtn(false),
+        setActive1hBtn(false),
         console.log('14d')
         break;
       case '30d':
@@ -100,6 +151,16 @@ export function CoinList() {
         setPercentage14d(false),
         setPercentage200d(false),
         setPercentage1y(false),
+        setActive1dBtn(false),
+        setActive7dBtn(false),
+        setActive14dBtn(false),
+        setActive30dBtn(true),
+        setActive200dBtn(false),
+        setActiveUsdBtn(false),
+        setActiveEurBtn(false),
+        setActiveJpyBtn(false),
+        setActive1yBtn(false),
+        setActive1hBtn(false),
         console.log('30d')
         break;
       case '200d':
@@ -110,6 +171,16 @@ export function CoinList() {
         setPercentage1h(false)
         setPercentage14d(false),
         setPercentage1y(false),
+        setActive1dBtn(false),
+        setActive7dBtn(false),
+        setActive14dBtn(false),
+        setActive30dBtn(false),
+        setActive200dBtn(true),
+        setActiveUsdBtn(false),
+        setActiveEurBtn(false),
+        setActiveJpyBtn(false),
+        setActive1yBtn(false),
+        setActive1hBtn(false),
         console.log('200d')
         break;
       case '1y':
@@ -120,10 +191,21 @@ export function CoinList() {
         setPercentage24h(false),
         setPercentage1h(false)
         setPercentage14d(false),
+        setActive1dBtn(false),
+        setActive7dBtn(false),
+        setActive14dBtn(false),
+        setActive30dBtn(false),
+        setActive200dBtn(false),
+        setActiveUsdBtn(false),
+        setActiveEurBtn(false),
+        setActiveJpyBtn(false),
+        setActive1yBtn(true),
+        setActive1hBtn(false),
         console.log('1y')
         break;
       default:
-        setPercentage24h(true);
+        setPercentage24h(true),
+        setActive1dBtn(true)
     }
     return;
   }
@@ -143,28 +225,22 @@ export function CoinList() {
       
       <div className={styles.chart_container}>   
         <div className={styles.select_btns_wrapper}>
-          {/* <div className={styles.select_time_btn_container}> */}
-            <button onClick={(e) => handleTimePricePercentage(e, '1h')}>1h</button>
-            <button onClick={(e) => handleTimePricePercentage(e, '1d')}>24h</button>
-            <button onClick={(e) => handleTimePricePercentage(e, '7d')}>7d</button>
-            <button onClick={(e) => handleTimePricePercentage(e, '14d')}>14d</button>
-            <button onClick={(e) => handleTimePricePercentage(e, '30d')}>30d</button>
-            <button onClick={(e) => handleTimePricePercentage(e, '200d')}>200d</button>
-            <button onClick={(e) => handleTimePricePercentage(e, '1y')}>1y</button>
-          {/* </div>  */}
-          {/* <div className={styles.select_currency_btn_container}> */}
-            <button onClick={() => setCurrency('usd')}>USD</button>
-            <button onClick={() => setCurrency('eur')}>EUR</button>
-            <button onClick={() => setCurrency('jpy')}>YEN</button>
-          {/* </div>   */}
+            <button  className={active1yBtn ? 'select_btn_active' : 'select_btn'} onClick={(e) => {handleTimePricePercentage(e, '1y')}}>1y</button>
+            <button  className={active1hBtn ? 'select_btn_active' : 'select_btn'} onClick={(e) => {handleTimePricePercentage(e, '1h')}}>1h</button>
+            <button  className={active1dBtn ? 'select_btn_active' : 'select_btn'} onClick={(e) => {handleTimePricePercentage(e, '1d')}}>24h</button>
+            <button  className={active7dBtn ? 'select_btn_active' : 'select_btn'} onClick={(e) => {handleTimePricePercentage(e, '7d')}}>7d</button>
+            <button  className={active14dBtn ? 'select_btn_active' : 'select_btn'} onClick={(e) => {handleTimePricePercentage(e, '14d')}}>14d</button>
+            <button  className={active30dBtn ? 'select_btn_active' : 'select_btn'} onClick={(e) => {handleTimePricePercentage(e, '30d')}}>30d</button>
+            <button  className={active200dBtn ? 'select_btn_active' : 'select_btn'} onClick={(e) => {handleTimePricePercentage(e, '200d')}}>200d</button>
+
+            <button className={activeUsdBtn ? 'select_btn_active' : 'select_btn'} onClick={() => setCurrency('usd')}>USD</button>
+            <button className={activeEurBtn ? 'select_btn_active' : 'select_btn'} onClick={() => setCurrency('eur')}>EUR</button>
+            <button className={activeJpyBtn ? 'select_btn_active' : 'select_btn'}onClick={() => setCurrency('jpy')}>YEN</button>
         </div>   
 
         {<CoinChart />}
 
       </div>
-
-
-
 
       <div className={styles.coin_search_container} >
         <input className={searchStyle} value={coinSearch} onChange={(e) => setCoinSearch(e.target.value)} placeholder={searchPlaceholder} />

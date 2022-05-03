@@ -43,7 +43,7 @@ export function Navbar() {
 
   const handleHomeBtn = (e) => {
     e.preventDefault()
-    setActiveHomeBtn('nav_btn_active')
+    setActiveHomeBtn(true)
     setActiveSearchBtn(false)
     setActiveUserWatchlistBtn(false)
     setActiveProfileBtn(false)
@@ -55,7 +55,7 @@ export function Navbar() {
     e.preventDefault()
     setActiveHomeBtn(false)
     setActiveSearchBtn(false)
-    setActiveUserWatchlistBtn('nav_btn_active')
+    setActiveUserWatchlistBtn(true)
     setActiveProfileBtn(false)
     setActiveLoginBtn(false)
     setActiveWatchlistBtn(false)
@@ -66,7 +66,7 @@ export function Navbar() {
     setActiveHomeBtn(false)
     setActiveSearchBtn(false)
     setActiveUserWatchlistBtn(false)
-    setActiveProfileBtn('nav_btn_active')
+    setActiveProfileBtn(true)
     setActiveLoginBtn(false)
     setActiveWatchlistBtn(false)
   }
@@ -77,14 +77,14 @@ export function Navbar() {
     setActiveSearchBtn(false)
     setActiveUserWatchlistBtn(false)
     setActiveProfileBtn(false)
-    setActiveLoginBtn('nav_btn_active')
+    setActiveLoginBtn(true)
     setActiveWatchlistBtn(false)
   }
 
   const handleSearchBtn = (e) => {
     e.preventDefault()
     setActiveHomeBtn(false)
-    setActiveSearchBtn('nav_btn_active')
+    setActiveSearchBtn(true)
     setActiveUserWatchlistBtn(false)
     setActiveProfileBtn(false)
     setActiveLoginBtn(false)
@@ -98,7 +98,7 @@ export function Navbar() {
     setActiveUserWatchlistBtn(false)
     setActiveProfileBtn(false)
     setActiveLoginBtn(false)
-    setActiveWatchlistBtn('nav_btn_active')
+    setActiveWatchlistBtn(true)
   }
 
   return (
