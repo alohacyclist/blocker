@@ -93,16 +93,6 @@
     margin: auto 1.7rem;
 }
 
- button {
-    background-color: transparent;
-    color: var(--background);
-    border: 1px solid var(--background);
-    border-radius: 4px;
-    width: 45px;
-    height: 25px;
-    margin-right: 15px;
-}
-
 .show_more_btn {
     margin: 1rem 2em;
     background-color: transparent;
@@ -263,8 +253,29 @@
     justify-content: center;
 }
 
-.select_btn {
+button {
+    background-color: transparent;
+    color: var(--background);
+    border: 1px solid var(--background);
+    border-radius: 4px;
+    width: 45px;
+    height: 25px;
     margin: 5px;
+}
+
+.select_btn {
+    background-color: transparent;
+    color: var(--background);
+    border: 1px solid var(--background);
+    border-radius: 4px;
+    width: 45px;
+    height: 25px;
+}
+
+.select_btn_active {
+    background-color: var(--background);
+    color: var(--bg);
+    border: var(--background_opacity2);
 }
 
 @media (min-width: 767px) {
