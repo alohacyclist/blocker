@@ -37,7 +37,6 @@ export function Signup() {
     e.preventDefault()
     signup(firstName, lastName, email, password)
     setShowForm(false)
-    setDisplayMessage('Check your Mail to verify your account.')
     setShowMessage(true)
     setTimeout(() => {setOpenSignup(false), setShowMessage(false), setShowForm(true)}, 4000)
   }
@@ -128,15 +127,15 @@ export function Signup() {
       <form  className='form' onSubmit={handleSubmit}>
           <p className='form_option' onClick={(e) => handleLoginForm(e)} style={{textAlign: 'center', margin: 0}} >Have an Account? Login.</p>
           <input id='firstName' placeholder='Enter your first name' value={firstName} onChange={(e) => { setFirstName(e.target.value), checkFirstName(e.target.value) }}/>
-          {errorsFirstName && <p>First Name: {errorsFirstName}</p>}
+          {errorsFirstName && <small className='form-errors'>First Name: {errorsFirstName}</small>}
           <input id='lastName' placeholder='Enter your last name' value={lastName} onChange={(e) => { setLastName(e.target.value), checkName(e.target.value) }}/>
-          {errorsName && <p>Last Name: {errorsName}</p>}
+          {errorsName && <small className='form-errors'>Last Name: {errorsName}</small>}
           <input id='email' placeholder='Enter your E-Mail' value={email} onChange={(e) => { setEmail(e.target.value), checkMail(e.target.value) }}/>
-          {errorsMail && <p>E-Mail: {errorsMail}</p>}
+          {errorsMail && <small className='form-errors'>E-Mail: {errorsMail}</small>}
           <input id='password' type='password' placeholder='Enter Password' value={password} onChange={(e) => { setPassword(e.target.value), checkPassword(e.target.value) }}/>
-          {errorsPassword && <p>Password: {errorsPassword}</p>}
+          {errorsPassword && <small className='form-errors'>Password: {errorsPassword}</small>}
           <input id='passwordRepeat' type='password' placeholder='Repeat Password' value={passwordRepeat} onChange={(e) => { setPasswordRepeat(e.target.value), checkPasswordRepeat(e.target.value, password)} }/>
-          {errorsRepeatPassword && <p>Repeat Password: {errorsRepeatPassword}</p>}
+          {errorsRepeatPassword && <small className='form-errors'>Repeat Password: {errorsRepeatPassword}</small>}
           {/* if all inputs are validated, show button */}
           {firstNameValidated && lastNameValidated && emailValidated && passwordValidated && passwordRepeatValidated && 
             <button className='form-btn'>Signup</button>}

@@ -70,6 +70,10 @@
     border: 5px solid greenyellow;
 }
 
+.form-errors {
+    color: var(--search_pink);
+}
+
 .login-options {
     display: flex;
     justify-content: space-evenly;
