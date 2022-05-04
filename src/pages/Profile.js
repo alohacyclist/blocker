@@ -13,7 +13,14 @@ export function Profile() {
 
     const [email, setEmail] = useState(user?.email)
     const [password, setPassword] = useState(user?.password)
-    /* const [passwordRepeat, setPasswordRepeat] = useState('') */
+    const [passwordRepeat, setPasswordRepeat] = useState('')
+
+    const [errorsMail, setErrorsMail] = useState(null)
+    const [emailValidated, setEmailValidated] = useState(false)
+    const [errorsPassword, setErrorsPassword] = useState(null)
+    const [passwordValidated, setPasswordValidated] = useState(false)
+    const [errorsRepeatPassword, setErrorsRepeatPassword] = useState(null)
+    const [passwordRepeatValidated, setPasswordRepeatValidated] = useState(false)
 
     const [showMessage, setShowMessage] = useState(false)
     const [deleteAccountConfirmation, setDeleteAccountConfirmation] = useState(false)
@@ -54,16 +61,65 @@ export function Profile() {
         userWatchlist?.votes?.length === 1 ? setLike('Like') : setLike('Likes')
     }, [edit])
 
+    // email validation
+    const checkMail = (mail) => {
+        if(!mail) {
+            setErrorsMail('REQUIRED')
+        } else if(!/\S+@\S+\.\S+/.test(mail)) {
+            setErrorsMail('Please provide valid E-Mail.')
+        } else {
+            setErrorsMail(null)
+            setEmailValidated(true)
+        }
+        return
+    }
+
+    // password validation
+    const checkPassword = (password) => {
+      if (!password) {
+            setErrorsPassword('REQUIRED')
+        } else if (password.length < 6) {
+            setErrorsPassword('Minimum password length is 6 characters')
+        } else {
+            setErrorsPassword(null)
+            setPasswordValidated(true)
+        }
+        return
+    }
+  
+    // passwordRepeat validation
+    const checkPasswordRepeat = (passwordRepeat, password) => {
+        if (!passwordRepeat) {
+            setErrorsRepeatPassword('REQUIRED')
+        } else if (passwordRepeat !== password) {
+            setErrorsRepeatPassword('Passwords do not match!')
+        } else {
+            setErrorsRepeatPassword(null)
+            setPasswordRepeatValidated(true)
+        }
+        return
+    }
+
     return (
         <div>
             {edit ? 
             <form  className={styles.profile_container} onSubmit={(e) => handleSubmit(e)}>
-                <label>{email}</label>
-                <input value={email} type='email' onChange={(e) => {setEmail(e.target.value)}}></input>
-                <input type='password' onChange={(e) => {setPassword(e.target.value)}} placeholder='Enter new password' ></input>
-                <button className={styles.profile_btn}>Save</button>
+                <p>Current: {email}</p>
+                <label>Set new E-Mail:</label>
+                <input value={email} type='email' onChange={(e) => {setEmail(e.target.value), checkMail(e.target.value)}}></input>
+                {errorsMail && <small className={styles.form-errors}>E-Mail: {errorsMail}</small>}
+
+                <label>Set new Password:</label>
+                <input type='password' value={password} onChange={(e) => {setPassword(e.target.value), checkPassword(e.target.value)}} placeholder='Enter new password' ></input>
+                {errorsPassword && <small className={styles.form-errors}>Password: {errorsPassword}</small>}
+
+                <input type='password' value={passwordRepeat} onChange={(e) => {setPasswordRepeat(e.target.value), checkPasswordRepeat(e.target.value)}} placeholder='Repeat new password' ></input>
+                {errorsRepeatPassword && <small className={styles.form-errors}>Repeat Password: {errorsRepeatPassword}</small>}
+
+                {emailValidated && passwordValidated && passwordRepeatValidated && <button className={styles.profile_btn}>Save</button>}
+                
             </form> : 
-            showMessage ? <div className={styles.profile_container_msg}>{displayMessage}</div> :
+            showMessage ? <div className={styles.profile_container_msg}><p>{displayMessage}</p></div> :
 
             <div className={styles.profile_container}>
                 <div style={{display:'flex', justifyContent: 'space-between'}}>
@@ -80,7 +136,7 @@ export function Profile() {
                 </div>           
                 {deleteAccountConfirmation && 
                 <div className={styles.profile_container_msg}>
-                    {displayMessage}
+                    <p>{displayMessage}</p>
                     <button className={styles.profile_btn} onClick={() => handleDeleteUser()}>DELETE</button>
                 </div>}
             </div>

@@ -31,6 +31,10 @@
     color: var(--text);
 }
 
+.form-errors {
+    color: var(--search_pink);
+}
+
 .profile_btn {
     min-width: 120px;
     max-width: 160px;
