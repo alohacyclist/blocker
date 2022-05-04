@@ -57,6 +57,8 @@ export function UserWatchlist({watchlist}) {
 
   useEffect(() => {fetchCoinPrices()}, [coins])
   useEffect(() => {getCoinCopy()}, [coinPriceNow])
+  useEffect(()=> {getWatchlists(), setWatchlistLikes(watchlist?.votes?.length)}, [handleLike])
+  useEffect(()=> {getWatchlists()}, [])
 
   const handleLike = async (watchlist) => {
     /* console.log(watchlist) */
@@ -68,9 +70,6 @@ export function UserWatchlist({watchlist}) {
     }
     const response = await client.post(url, config)
     console.log('watchlists like', response)
-    setWatchlistLikes(watchlist.votes.length)
-    getWatchlists()
-    /* console.log(watchlist.votes) */
   }
 
   return (
@@ -80,7 +79,7 @@ export function UserWatchlist({watchlist}) {
         <div className={styles.watchlist_item_selected}>
           <div className={styles.watchlist_item_header}>
             {watchlist?.id?.firstName}'s Watchlist
-            <div className={styles.likes_container} onClick={() => handleLike(watchlist)}>{watchlist?.votes?.length} <AiOutlineLike/></div>  
+            <div className={styles.likes_container} onClick={() => handleLike(watchlist)}>{watchlistLikes} <AiOutlineLike/></div>  
           </div>
 
           {/* {console.log(watchlist)} */}
