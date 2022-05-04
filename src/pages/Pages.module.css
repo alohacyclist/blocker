@@ -31,6 +31,10 @@
     color: var(--text);
 }
 
+label {
+    color: var(--text);
+}
+
 .form_errors {
     color: var(--search_pink);
 }

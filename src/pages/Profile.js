@@ -113,7 +113,7 @@ export function Profile() {
                 <input type='password' onChange={(e) => {setPassword(e.target.value), checkPassword(e.target.value)}} placeholder='Enter new password' ></input>
                 {errorsPassword && <small className={styles.form_errors}>Password: {errorsPassword}</small>}
 
-                <input type='password'  onChange={(e) => {setPasswordRepeat(e.target.value), checkPasswordRepeat(e.target.value)}} placeholder='Repeat new password' ></input>
+                <input type='password'  onChange={(e) => {setPasswordRepeat(e.target.value), checkPasswordRepeat(e.target.value, password)}} placeholder='Repeat new password' ></input>
                 {errorsRepeatPassword && <small className={styles.form_errors}>Repeat Password: {errorsRepeatPassword}</small>}
 
                 {emailValidated && passwordValidated && passwordRepeatValidated && <button className={styles.profile_btn}>Save</button>}
