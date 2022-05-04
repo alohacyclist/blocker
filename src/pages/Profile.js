@@ -107,14 +107,14 @@ export function Profile() {
                 <p>Current: {email}</p>
                 <label>Set new E-Mail:</label>
                 <input value={email} type='email' onChange={(e) => {setEmail(e.target.value), checkMail(e.target.value)}}></input>
-                {errorsMail && <small className={styles.form-errors}>E-Mail: {errorsMail}</small>}
+                {errorsMail && <small className={styles.form_errors}>E-Mail: {errorsMail}</small>}
 
                 <label>Set new Password:</label>
-                <input type='password' value={password} onChange={(e) => {setPassword(e.target.value), checkPassword(e.target.value)}} placeholder='Enter new password' ></input>
-                {errorsPassword && <small className={styles.form-errors}>Password: {errorsPassword}</small>}
+                <input type='password' onChange={(e) => {setPassword(e.target.value), checkPassword(e.target.value)}} placeholder='Enter new password' ></input>
+                {errorsPassword && <small className={styles.form_errors}>Password: {errorsPassword}</small>}
 
-                <input type='password' value={passwordRepeat} onChange={(e) => {setPasswordRepeat(e.target.value), checkPasswordRepeat(e.target.value)}} placeholder='Repeat new password' ></input>
-                {errorsRepeatPassword && <small className={styles.form-errors}>Repeat Password: {errorsRepeatPassword}</small>}
+                <input type='password'  onChange={(e) => {setPasswordRepeat(e.target.value), checkPasswordRepeat(e.target.value)}} placeholder='Repeat new password' ></input>
+                {errorsRepeatPassword && <small className={styles.form_errors}>Repeat Password: {errorsRepeatPassword}</small>}
 
                 {emailValidated && passwordValidated && passwordRepeatValidated && <button className={styles.profile_btn}>Save</button>}
                 

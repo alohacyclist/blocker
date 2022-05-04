@@ -76,9 +76,6 @@ export function CoinList() {
         setActive14dBtn(false),
         setActive30dBtn(false),
         setActive200dBtn(false),
-        setActiveUsdBtn(false),
-        setActiveEurBtn(false),
-        setActiveJpyBtn(false),
         setActive1yBtn(false),
         setActive1hBtn(true),
         console.log('1h')
@@ -96,9 +93,6 @@ export function CoinList() {
         setActive14dBtn(false),
         setActive30dBtn(false),
         setActive200dBtn(false),
-        setActiveUsdBtn(false),
-        setActiveEurBtn(false),
-        setActiveJpyBtn(false),
         setActive1yBtn(false),
         setActive1hBtn(false),
         console.log('24h')
@@ -116,9 +110,6 @@ export function CoinList() {
         setActive14dBtn(false),
         setActive30dBtn(false),
         setActive200dBtn(false),
-        setActiveUsdBtn(false),
-        setActiveEurBtn(false),
-        setActiveJpyBtn(false),
         setActive1yBtn(false),
         setActive1hBtn(false),
         console.log('7d')
@@ -136,9 +127,6 @@ export function CoinList() {
         setActive14dBtn(true),
         setActive30dBtn(false),
         setActive200dBtn(false),
-        setActiveUsdBtn(false),
-        setActiveEurBtn(false),
-        setActiveJpyBtn(false),
         setActive1yBtn(false),
         setActive1hBtn(false),
         console.log('14d')
@@ -156,9 +144,6 @@ export function CoinList() {
         setActive14dBtn(false),
         setActive30dBtn(true),
         setActive200dBtn(false),
-        setActiveUsdBtn(false),
-        setActiveEurBtn(false),
-        setActiveJpyBtn(false),
         setActive1yBtn(false),
         setActive1hBtn(false),
         console.log('30d')
@@ -176,9 +161,6 @@ export function CoinList() {
         setActive14dBtn(false),
         setActive30dBtn(false),
         setActive200dBtn(true),
-        setActiveUsdBtn(false),
-        setActiveEurBtn(false),
-        setActiveJpyBtn(false),
         setActive1yBtn(false),
         setActive1hBtn(false),
         console.log('200d')
@@ -196,9 +178,6 @@ export function CoinList() {
         setActive14dBtn(false),
         setActive30dBtn(false),
         setActive200dBtn(false),
-        setActiveUsdBtn(false),
-        setActiveEurBtn(false),
-        setActiveJpyBtn(false),
         setActive1yBtn(true),
         setActive1hBtn(false),
         console.log('1y')
@@ -233,9 +212,9 @@ export function CoinList() {
             <button  className={active200dBtn ? styles.select_btn_active : styles.select_btn} onClick={(e) => handleTimePricePercentage(e, '200d')}>200d</button>
             <button  className={active1yBtn ? styles.select_btn_active : styles.select_btn} onClick={(e) => {handleTimePricePercentage(e, '1y'), setActive1yBtn(true)}}>1y</button>
 
-            <button className={activeUsdBtn ? styles.select_btn_active : styles.select_btn} onClick={() => setCurrency('usd')}>USD</button>
-            <button className={activeEurBtn ? styles.select_btn_active : styles.select_btn} onClick={() => setCurrency('eur')}>EUR</button>
-            <button className={activeJpyBtn ? styles.select_btn_active : styles.select_btn}onClick={() => setCurrency('jpy')}>YEN</button>
+            <button className={activeUsdBtn ? styles.select_btn_active : styles.select_btn} onClick={() => {setCurrency('usd'), setActiveUsdBtn(true), setActiveEurBtn(false), setActiveJpyBtn(false)}}>USD</button>
+            <button className={activeEurBtn ? styles.select_btn_active : styles.select_btn} onClick={() => {setCurrency('eur'), setActiveUsdBtn(false), setActiveEurBtn(true), setActiveJpyBtn(false)}}>EUR</button>
+            <button className={activeJpyBtn ? styles.select_btn_active : styles.select_btn} onClick={() => {setCurrency('jpy'), setActiveUsdBtn(false), setActiveEurBtn(false), setActiveJpyBtn(true)}}>YEN</button>
         </div>   
 
         {<CoinChart />}
