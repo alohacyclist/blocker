@@ -30,13 +30,13 @@ export function CoinList() {
   const [active200dBtn, setActive200dBtn] = useState(false)
   const [active1yBtn, setActive1yBtn]  = useState(false)
   
-  const [activeUsdBtn, setActiveUsdBtn] = useState(false)
+  const [activeUsdBtn, setActiveUsdBtn] = useState(true)
   const [activeEurBtn, setActiveEurBtn] = useState(false)
   const [activeJpyBtn, setActiveJpyBtn] = useState(false)
 
   const fetchCoins = async () => {
       setIsLoading(true)
-      const {data} = await coingecko.get(`coins/markets/?vs_currency=${currency}&per_page=20&page=${page.toString()}&price_change_percentage=${timePricePercentage}`) /* for testing: &ids=bitcoin%2C%20cardano */
+      const {data} = await coingecko.get(`coins/markets/?vs_currency=${currency}&per_page=20&page=${page.toString()}&price_change_percentage=${timePricePercentage}`)
       setCoinList(data)
       setCoinFilter(data)
       setIsLoading(false)

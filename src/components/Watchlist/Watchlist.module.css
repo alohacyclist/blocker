@@ -47,6 +47,7 @@
     padding: .5rem;
     margin-right: .5rem;
     border: 1px solid var(--text);
+    z-index: 100;
 }
 
 .watchlists_wrapper {

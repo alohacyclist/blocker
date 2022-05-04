@@ -12,13 +12,14 @@ export function Profile() {
     const [edit, setEdit] = useState(false)
 
     const [email, setEmail] = useState(user?.email)
-    const [password, setPassword] = useState(user?.password)
-    const [passwordRepeat, setPasswordRepeat] = useState('')
-
     const [errorsMail, setErrorsMail] = useState(null)
     const [emailValidated, setEmailValidated] = useState(false)
+
+    const [password, setPassword] = useState(user?.password)
     const [errorsPassword, setErrorsPassword] = useState(null)
     const [passwordValidated, setPasswordValidated] = useState(false)
+
+    const [passwordRepeat, setPasswordRepeat] = useState('')
     const [errorsRepeatPassword, setErrorsRepeatPassword] = useState(null)
     const [passwordRepeatValidated, setPasswordRepeatValidated] = useState(false)
 
@@ -104,7 +105,7 @@ export function Profile() {
         <div>
             {edit ? 
             <form  className={styles.profile_container} onSubmit={(e) => handleSubmit(e)}>
-                <p>Current: {email}</p>
+                <p className={styles.form_errors} >Current: {email}</p>
                 <label>Set new E-Mail:</label>
                 <input value={email} type='email' onChange={(e) => {setEmail(e.target.value), checkMail(e.target.value)}}></input>
                 {errorsMail && <small className={styles.form_errors}>E-Mail: {errorsMail}</small>}
