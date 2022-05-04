@@ -28,11 +28,11 @@ export function CoinList() {
   const [active14dBtn, setActive14dBtn] = useState(false)
   const [active30dBtn, setActive30dBtn] = useState(false)
   const [active200dBtn, setActive200dBtn] = useState(false)
+  const [active1yBtn, setActive1yBtn]  = useState(false)
+  
   const [activeUsdBtn, setActiveUsdBtn] = useState(false)
   const [activeEurBtn, setActiveEurBtn] = useState(false)
   const [activeJpyBtn, setActiveJpyBtn] = useState(false)
-  const [active1yBtn, setActive1yBtn]  = useState(false)
-  
 
   const fetchCoins = async () => {
       setIsLoading(true)
@@ -233,9 +233,9 @@ export function CoinList() {
             <button  className={active200dBtn ? styles.select_btn_active : styles.select_btn} onClick={(e) => handleTimePricePercentage(e, '200d')}>200d</button>
             <button  className={active1yBtn ? styles.select_btn_active : styles.select_btn} onClick={(e) => {handleTimePricePercentage(e, '1y'), setActive1yBtn(true)}}>1y</button>
 
-            <button className={activeUsdBtn ? 'select_btn_active' : 'select_btn'} onClick={() => setCurrency('usd')}>USD</button>
-            <button className={activeEurBtn ? 'select_btn_active' : 'select_btn'} onClick={() => setCurrency('eur')}>EUR</button>
-            <button className={activeJpyBtn ? 'select_btn_active' : 'select_btn'}onClick={() => setCurrency('jpy')}>YEN</button>
+            <button className={activeUsdBtn ? styles.select_btn_active : styles.select_btn} onClick={() => setCurrency('usd')}>USD</button>
+            <button className={activeEurBtn ? styles.select_btn_active : styles.select_btn} onClick={() => setCurrency('eur')}>EUR</button>
+            <button className={activeJpyBtn ? styles.select_btn_active : styles.select_btn}onClick={() => setCurrency('jpy')}>YEN</button>
         </div>   
 
         {<CoinChart />}
