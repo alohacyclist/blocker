@@ -21,11 +21,16 @@ export function Login() {
     login(mail, password)
     // wait for login function via set timeout
     setTimeout(() => {
-      if(user) setDisplayMessage('Enjoy BLOCKER')
-    }, 1000)
+      if(user) {
+        setDisplayMessage('Enjoy BLOCKER') 
+      } else if (!user) {
+        setDisplayMessage('Invalid Email or Password. Do you have an account and confirmed your email already?') 
+
+      }
+    }, 1500)
 
     setShowForm(false)
-    setTimeout(() => {setLogin(false), setShowForm(true), setDisplayMessage(''), navigate('/')}, 3500)
+    setTimeout(() => {setLogin(false), setShowForm(true), setDisplayMessage(''), navigate('/')}, 4000)
   }
 
   const handleClose = () => {setLogin(false)}
