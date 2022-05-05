@@ -84,15 +84,16 @@ export function Profile() {
 
     const handleDeleteUser = async () => {
         const response = await client.post('/auth/delete', {user})
+        console.log(response.data)
+        console.log('delete complete')
+
+        setTimeout(()=>{navigate('/')}, 5000)
         deleteToken()
         setUser(null)
-        console.log(response.data)
         setDisplayMessage('Account deleted')
         setShowMessage(true)
         setDeleteAccountConfirmation(false)
         setTimeout(()=>{setShowMessage(false)}, 2000)
-        console.log('delete complete')
-        navigate('/')
     }
 
     const deleteToken = () => {
@@ -148,9 +149,9 @@ export function Profile() {
         <div>
             {editEmail &&
             <div className={styles.profile_container}>
-            <form   onSubmit={(e) => handleSubmitEmail(e)}>
-                <p className={styles.form_errors} >Current: {email}</p>
-                <label>Set new E-Mail:</label>
+            <form onSubmit={(e) => handleSubmitEmail(e)}>
+                {/* <p className={styles.form_errors} >Current: {email}</p>
+                <label>Set new E-Mail:</label> */}
                 <input value={email} type='email' onChange={(e) => {setEmail(e.target.value), checkMail(e.target.value)}}></input>
                 {errorsMail && <small className={styles.form_errors}>E-Mail: {errorsMail}</small>}
                 {emailValidated  && <button className={styles.profile_btn}>Save</button>}
@@ -171,10 +172,10 @@ export function Profile() {
                 {passwordValidated && passwordRepeatValidated && <button className={styles.profile_btn}>Save</button>}             
             </form>
             {cancelPassword && <button className={styles.profile_btn} onClick={(e) => {handleCancel(e)}} >Cancel</button>}
-            {showMessage && <div className={styles.profile_container_msg}><p>{displayMessage}</p></div>}
 
             </div>}
-            
+            {showMessage && <div className={styles.profile_container_msg}><p>{displayMessage}</p></div>}
+        
 
             <div className={styles.profile_container}>
                 <div style={{display:'flex', justifyContent: 'space-between'}}>
