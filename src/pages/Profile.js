@@ -6,10 +6,12 @@ import { client } from '../client'
 
 export function Profile() {
 
-    const { user, watchlist, userWatchlist, editProfile, navigate, verify, displayMessage, setDisplayMessage } = useContext(CryptoContext)
+    const { user, watchlist, userWatchlist, navigate, verify, displayMessage, setDisplayMessage } = useContext(CryptoContext)
 
     const [like, setLike] = useState('Likes')
-    const [edit, setEdit] = useState(false)
+    const [editEmail, setEditEmail] = useState(false)
+    const [editPassword, setEditPassword] = useState(false)
+
 
     const [email, setEmail] = useState(user?.email)
     const [errorsMail, setErrorsMail] = useState(null)
@@ -26,15 +28,45 @@ export function Profile() {
     const [showMessage, setShowMessage] = useState(false)
     const [deleteAccountConfirmation, setDeleteAccountConfirmation] = useState(false)
 
-    const handleSubmit = (e) => {
+    const editProfileEmail = async (email) => {
+        try {
+            const response = await client.post('/user/profile-em', {email})
+            setUser(response.data)
+            console.log('edit data:', response.data)
+        } catch {
+          console.error(err)
+        }
+    }
+
+    const editProfilePassword = async (email) => {
+        try {
+            const response = await client.post('/user/profile-pw', {password})
+            setUser(response.data)
+            console.log('edit data:', response.data)
+        } catch {
+          console.error(err)
+        }
+    }
+
+    const handleSubmitEmail = (e) => {
         e.preventDefault()
-        editProfile(email, password)
+        editProfileEmail(email)
         setEdit(false)
-        setDisplayMessage('Changes saved.')
+        setDisplayMessage('New E-Mail saved.')
         setShowMessage(true)
         navigate('/user/profile')
         setTimeout(()=>{setShowMessage(false)}, 2000)
     }
+    const handleSubmitPassword = (e) => {
+        e.preventDefault()
+        editProfilePassword(password)
+        setEdit(false)
+        setDisplayMessage('New password saved.')
+        setShowMessage(true)
+        navigate('/user/profile')
+        setTimeout(()=>{setShowMessage(false)}, 2000)
+    }
+
 
     const handleDeleteUserClick = (e) => {
         e.preventDefault()
@@ -103,13 +135,19 @@ export function Profile() {
 
     return (
         <div>
-            {edit ? 
-            <form  className={styles.profile_container} onSubmit={(e) => handleSubmit(e)}>
+            {editEmail &&
+            
+            <form  className={styles.profile_container} onSubmit={(e) => handleSubmitEmail(e)}>
                 <p className={styles.form_errors} >Current: {email}</p>
                 <label>Set new E-Mail:</label>
                 <input value={email} type='email' onChange={(e) => {setEmail(e.target.value), checkMail(e.target.value)}}></input>
                 {errorsMail && <small className={styles.form_errors}>E-Mail: {errorsMail}</small>}
+                {emailValidated  && <button className={styles.profile_btn}>Save</button>}
+            </form>}
 
+            {editPassword && 
+
+             <form className={styles.profile_container} onSubmit={(e) => handleSubmitPassword(e)}> 
                 <label>Set new Password:</label>
                 <input type='password' onChange={(e) => {setPassword(e.target.value), checkPassword(e.target.value)}} placeholder='Enter new password' ></input>
                 {errorsPassword && <small className={styles.form_errors}>Password: {errorsPassword}</small>}
@@ -117,10 +155,11 @@ export function Profile() {
                 <input type='password'  onChange={(e) => {setPasswordRepeat(e.target.value), checkPasswordRepeat(e.target.value, password)}} placeholder='Repeat new password' ></input>
                 {errorsRepeatPassword && <small className={styles.form_errors}>Repeat Password: {errorsRepeatPassword}</small>}
 
-                {emailValidated && passwordValidated && passwordRepeatValidated && <button className={styles.profile_btn}>Save</button>}
-                
-            </form> : 
-            showMessage ? <div className={styles.profile_container_msg}><p>{displayMessage}</p></div> :
+                {passwordValidated && passwordRepeatValidated && <button className={styles.profile_btn}>Save</button>}
+             
+            </form>}
+            
+            {showMessage && <div className={styles.profile_container_msg}><p>{displayMessage}</p></div>}
 
             <div className={styles.profile_container}>
                 <div style={{display:'flex', justifyContent: 'space-between'}}>
@@ -132,7 +171,8 @@ export function Profile() {
                     <p style={{color: 'rgba(235, 248, 232, 1)',backgroundColor: 'rgba(42, 26, 71, 1)', border: '2px solid #f79000', padding: '3px' }}>{user?.firstName} {user?.lastName}</p>
                 </div>     
                 <div>
-                    <button className={styles.profile_btn} onClick={() => setEdit(true)}>Edit Profile</button>
+                    <button className={styles.profile_btn} onClick={() => setEditEmail(true)}>Edit Email</button>
+                    <button className={styles.profile_btn} onClick={() => setEditPassword(true)}>Edit Password</button>
                     <button className={styles.profile_btn} onClick={(e) => handleDeleteUserClick(e)}>Delete Account</button>
                 </div>           
                 {deleteAccountConfirmation && 
@@ -141,7 +181,7 @@ export function Profile() {
                     <button className={styles.profile_btn} onClick={() => handleDeleteUser()}>DELETE</button>
                 </div>}
             </div>
-            }
+            
             
         </div>
     )

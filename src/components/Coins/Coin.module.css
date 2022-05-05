@@ -11,10 +11,9 @@
     --yellow: #f79000;
 }
 
-/* .top_chart {
-    display: flex;
-    margin: 0 auto;
-} */
+button {
+    cursor: pointer;
+}
 
 .main_chart {
     max-width: 800px;
@@ -195,8 +194,8 @@
     box-shadow: rgba(240, 46, 170, 0.4) 5px -5px;
 
     font-size: .8rem;
-    width: 185px;
-    height: 185px;
+    width: 175px;
+    height: 175px;
     padding: 5px;
     margin: 5px;
 }
@@ -235,11 +234,10 @@
     box-shadow: none;
     top: -2px;
     left: 2px;
-    background-color: var(--bg);
+    background-color: var(--background);
     color: var(--search_pink);
     font-weight: 800;
     border: 3px solid;
-    cursor: pointer;
 }
 
 .chart_container {

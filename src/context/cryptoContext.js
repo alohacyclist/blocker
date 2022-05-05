@@ -47,16 +47,6 @@ export const CryptoContextProvider = props => {
         }
     }
 
-    const editProfile = async (email, password) => {
-      try {
-          const response = await client.post('/user/profile', {email, password})
-          setUser(response.data)
-          console.log('edit data:', response.data)
-      } catch {
-        console.error(err)
-      }
-  }
-
     const login = async (email, password) => {
         try {
           const response = await client.post('/auth/login', {
@@ -169,7 +159,7 @@ export const CryptoContextProvider = props => {
         searchPlaceholder, setSearchPlaceholder, setLogin, openSignup, 
         setOpenSignup, getWatchlists, displayMessage, setDisplayMessage,
         coinPerformance, getUserWatchlist, searchStyle, setSearchStyle, 
-        editProfile, verify, openForgotPassword, setOpenForgotPassword
+        verify, openForgotPassword, setOpenForgotPassword
     }
 
     return (
