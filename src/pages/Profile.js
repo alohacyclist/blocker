@@ -6,7 +6,7 @@ import { client } from '../client'
 
 export function Profile() {
 
-    const { user, watchlist, userWatchlist, navigate, verify, displayMessage, setDisplayMessage } = useContext(CryptoContext)
+    const { user, setUser, watchlist, userWatchlist, navigate, verify, displayMessage, setDisplayMessage } = useContext(CryptoContext)
 
     const [like, setLike] = useState('Likes')
     const [editEmail, setEditEmail] = useState(false)
@@ -76,11 +76,12 @@ export function Profile() {
 
     const handleDeleteUser = async () => {
         deleteToken()
-        navigate('/')
+        setUser(null)
         const response = await client.post('/auth/delete', {user})
         console.log(response.data)
         setDisplayMessage('')
         setDeleteAccountConfirmation(false)
+        navigate('/')
         console.log('delete complete')
     }
 
