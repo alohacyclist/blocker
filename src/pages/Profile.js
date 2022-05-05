@@ -80,6 +80,7 @@ export function Profile() {
     }
 
     const handleDeleteUser = async () => {
+        navigate('/')
         deleteToken()
         setUser(null)
         console.log(response.data)
@@ -88,7 +89,6 @@ export function Profile() {
         setDeleteAccountConfirmation(false)
         setTimeout(()=>{setShowMessage(false)}, 2000)
         const response = await client.post('/auth/delete', {user})
-        navigate('/')
         console.log('delete complete')
     }
 
