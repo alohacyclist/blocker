@@ -84,16 +84,14 @@ export function Profile() {
 
     const handleDeleteUser = async () => {
         const response = await client.post('/auth/delete', {user})
-        console.log(response.data)
-        console.log('delete complete')
-
-        setTimeout(()=>{navigate('/')}, 5000)
+        console.log('DELETE', response.data)
         deleteToken()
         setUser(null)
         setDisplayMessage('Account deleted')
         setShowMessage(true)
         setDeleteAccountConfirmation(false)
         setTimeout(()=>{setShowMessage(false)}, 2000)
+        navigate('/')
     }
 
     const deleteToken = () => {
