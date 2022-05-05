@@ -15,22 +15,16 @@ export function Login() {
 
   if(!openLogin) return null
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     setDisplayMessage('Loggin you in...')
-    login(mail.toLowerCase(), password)
+    await login(mail.toLowerCase(), password)
     // wait for login function via set timeout
-    setTimeout(() => {
-      if(user) {
-        setDisplayMessage('Enjoy BLOCKER') 
-      } 
-    }, 1500)
-    setTimeout(() => {
-      if(!user) {
-        setDisplayMessage('Invalid E-Mail or Password. Have you confirmed your Email?') 
-      } 
-    }, 2500)
-
+    if(user) { 
+      setDisplayMessage('Enjoy BLOCKER') 
+    } else if (!user) {
+      setDisplayMessage ('Invalid Email or Password. Have you confirmed your Email?')
+    }
     setShowForm(false)
     setTimeout(() => {setLogin(false), setShowForm(true), setDisplayMessage(''), navigate('/')}, 5000)
   }
