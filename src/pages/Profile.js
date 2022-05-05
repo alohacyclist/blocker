@@ -38,7 +38,7 @@ export function Profile() {
         }
     }
 
-    const editProfilePassword = async (email) => {
+    const editProfilePassword = async (password) => {
         try {
             const response = await client.post('/user/profile-pw', {password})
             setUser(response.data)
@@ -51,7 +51,7 @@ export function Profile() {
     const handleSubmitEmail = (e) => {
         e.preventDefault()
         editProfileEmail(email)
-        setEdit(false)
+        setEditEmail(false)
         setDisplayMessage('New E-Mail saved.')
         setShowMessage(true)
         navigate('/user/profile')
@@ -60,7 +60,7 @@ export function Profile() {
     const handleSubmitPassword = (e) => {
         e.preventDefault()
         editProfilePassword(password)
-        setEdit(false)
+        setEditPassword(false)
         setDisplayMessage('New password saved.')
         setShowMessage(true)
         navigate('/user/profile')
@@ -92,7 +92,7 @@ export function Profile() {
         verify()
         await watchlist(user?._id)
         userWatchlist?.votes?.length === 1 ? setLike('Like') : setLike('Likes')
-    }, [edit])
+    }, [editEmail, editPassword])
 
     // email validation
     const checkMail = (mail) => {
