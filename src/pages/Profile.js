@@ -66,6 +66,12 @@ export function Profile() {
         setTimeout(()=>{setShowMessage(false)}, 2000)
     }
 
+    const handleCancel = (e) => {
+        e.preventDefault()
+        setEditEmail(false)
+        setEditPassword(false)
+        navigate('/user/profile')
+    }
 
     const handleDeleteUserClick = (e) => {
         e.preventDefault()
@@ -146,6 +152,7 @@ export function Profile() {
                 {errorsMail && <small className={styles.form_errors}>E-Mail: {errorsMail}</small>}
                 {emailValidated  && <button className={styles.profile_btn}>Save</button>}
             </form>}
+            <button className={styles.profile_btn} onClick={(e) => {handleCancel(e)}} >Cancel</button>
 
             {editPassword && 
 
@@ -157,9 +164,9 @@ export function Profile() {
                 <input type='password'  onChange={(e) => {setPasswordRepeat(e.target.value), checkPasswordRepeat(e.target.value, password)}} placeholder='Repeat new password' ></input>
                 {errorsRepeatPassword && <small className={styles.form_errors}>Repeat Password: {errorsRepeatPassword}</small>}
 
-                {passwordValidated && passwordRepeatValidated && <button className={styles.profile_btn}>Save</button>}
-             
+                {passwordValidated && passwordRepeatValidated && <button className={styles.profile_btn}>Save</button>}             
             </form>}
+            <button className={styles.profile_btn} onClick={(e) => {handleCancel(e)}} >Cancel</button>
             
             {showMessage && <div className={styles.profile_container_msg}><p>{displayMessage}</p></div>}
 
