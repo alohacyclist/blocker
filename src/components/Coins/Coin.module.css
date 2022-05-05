@@ -205,7 +205,7 @@
     display: flex;
     text-align: left;
     justify-content: space-between;
-    height: 50px;
+    height: 45px;
 }
 
 .watchlist_coin_element_info {
@@ -216,6 +216,7 @@
     padding: 2px;
     position: relative;
     z-index: 1;
+    max-width: 160px;
 }
 
 .remove_coin_btn {

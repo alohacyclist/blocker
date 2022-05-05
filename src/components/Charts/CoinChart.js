@@ -41,7 +41,7 @@ const formatedData = {
   labels,
   datasets: [{
     label: 'usd',
-    data: chartData?.map(dataset => dataset[1])
+    data: chartData?.map(dataset => dataset[1]),
     }]
   }
 
@@ -49,7 +49,6 @@ const options = {
   borderColor: 'rgba(59, 213, 253, 1)',
   pointRadius: 0,
   tension: .1,
-  fill: true,
   legend: {
     display: false
   },
