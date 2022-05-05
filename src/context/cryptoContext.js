@@ -53,7 +53,6 @@ export const CryptoContextProvider = props => {
             email,
             password,
           })
-          console.log('logged in', response)
           saveToken(response.data.token)
           setUser(response.data.user)
           setDisplayMessage('Enjoy Blocker.')

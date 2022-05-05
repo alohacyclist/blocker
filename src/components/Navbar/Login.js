@@ -19,16 +19,6 @@ export function Login() {
     e.preventDefault()
     setDisplayMessage('Loggin you in...')
     await login(mail.toLowerCase(), password)
-    // wait for login function via set timeout
-
-    setTimeout(() => {
-      if (!user) {
-        setDisplayMessage ('Invalid Email or Password. Have you confirmed your Email?')
-      } else if(user) { 
-        setDisplayMessage('Enjoy BLOCKER') 
-      }
-    }, 3000)
-
     setShowForm(false)
     setTimeout(() => {setLogin(false), setShowForm(true), setDisplayMessage(''), navigate('/')}, 5000)
   }
