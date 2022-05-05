@@ -20,12 +20,12 @@ export function Login() {
     setDisplayMessage('Loggin you in...')
     await login(mail.toLowerCase(), password)
     // wait for login function via set timeout
-    if(user) { 
-      setDisplayMessage('Enjoy BLOCKER') 
-    }
+
     setTimeout(() => {
       if (!user) {
         setDisplayMessage ('Invalid Email or Password. Have you confirmed your Email?')
+      } else if(user) { 
+        setDisplayMessage('Enjoy BLOCKER') 
       }
     }, 3000)
 
