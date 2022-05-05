@@ -194,17 +194,18 @@ button {
     box-shadow: rgba(240, 46, 170, 0.4) 5px -5px;
 
     font-size: .8rem;
-    width: 175px;
-    height: 175px;
-    padding: 5px;
-    margin: 5px;
+    width: 177px;
+    height: 177px;
+    padding: 4px;
+    margin: 4px;
 }
 
 .watchlist_coin_element_header {
     display: flex;
     text-align: left;
     justify-content: space-between;
-    height: 45px;
+    height: 40px;
+
 }
 
 .watchlist_coin_element_info {
