@@ -53,10 +53,13 @@ export function Signup() {
       const checkFirstName = (name) => {
         if(!name) {
           setErrorsFirstName('REQUIRED')
+          setFirstNameValidated(false)
         } else if(name.length < 2) {
           setErrorsFirstName('Minimum length is 2 letters.')
+          setFirstNameValidated(false)
         } else if(/[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/.test(name)) {
           setErrorsFirstName('First name contains special characters.')
+          setFirstNameValidated(false)
         } else {
           setErrorsFirstName(null)
           setFirstNameValidated(true)
@@ -68,10 +71,12 @@ export function Signup() {
     const checkName = (name) => {
       if(!name) {
         setErrorsName('REQUIRED')
+        setLastNameValidated(false)
       } else if(name.length < 2) {
         setErrorsName('Minimum length is 2 letters.')
       } else if(/[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/.test(name)) {
         setErrorsName('First name contains special characters.')
+        setLastNameValidated(false)
       } else {
         setErrorsName(null)
         setLastNameValidated(true)
@@ -83,8 +88,10 @@ export function Signup() {
     const checkMail = (mail) => {
       if(!mail) {
       setErrorsMail('REQUIRED')
+      setEmailValidated(false)
     } else if(!/\S+@\S+\.\S+/.test(mail)) {
       setErrorsMail('Please provide valid E-Mail.')
+      setEmailValidated(false)
     } else {
       setErrorsMail(null)
       setEmailValidated(true)
@@ -96,8 +103,12 @@ export function Signup() {
   const checkPassword = (password) => {
     if (!password) {
       setErrorsPassword('REQUIRED')
+      setPasswordValidated(false)
+
     } else if (password.length < 6) {
       setErrorsPassword('Minimum password length is 6 characters')
+      setPasswordValidated(false)
+
     } else {
       setErrorsPassword(null)
       setPasswordValidated(true)
@@ -109,8 +120,10 @@ export function Signup() {
   const checkPasswordRepeat = (passwordRepeat, password) => {
     if (!passwordRepeat) {
       setErrorsRepeatPassword('REQUIRED')
+      setPasswordRepeatValidated(false)
     } else if (passwordRepeat !== password) {
       setErrorsRepeatPassword('Passwords do not match!')
+      setPasswordRepeatValidated(false)
     } else {
       setErrorsRepeatPassword(null)
       setPasswordRepeatValidated(true)

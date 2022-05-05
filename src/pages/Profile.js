@@ -102,8 +102,10 @@ export function Profile() {
     const checkMail = (mail) => {
         if(!mail) {
             setErrorsMail('REQUIRED')
+            setEmailValidated(false)
         } else if(!/\S+@\S+\.\S+/.test(mail)) {
             setErrorsMail('Please provide valid E-Mail.')
+            setEmailValidated(false)
         } else {
             setErrorsMail(null)
             setEmailValidated(true)
@@ -115,8 +117,10 @@ export function Profile() {
     const checkPassword = (password) => {
       if (!password) {
             setErrorsPassword('REQUIRED')
+            setPasswordValidated(false)
         } else if (password.length < 6) {
             setErrorsPassword('Minimum password length is 6 characters')
+            setPasswordValidated(false)
         } else {
             setErrorsPassword(null)
             setPasswordValidated(true)
@@ -128,8 +132,10 @@ export function Profile() {
     const checkPasswordRepeat = (passwordRepeat, password) => {
         if (!passwordRepeat) {
             setErrorsRepeatPassword('REQUIRED')
+            setPasswordRepeatValidated(false)
         } else if (passwordRepeat !== password) {
             setErrorsRepeatPassword('Passwords do not match!')
+            setPasswordRepeatValidated(true)
         } else {
             setErrorsRepeatPassword(null)
             setPasswordRepeatValidated(true)
