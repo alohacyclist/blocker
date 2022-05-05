@@ -56,6 +56,49 @@ nav {
     right: 0;
 }
 
+.nav_btn_text {
+    display: none;
+}
+
+.nav_btn_text_active {
+    display: none;
+}
+
+@media (max-width: 425px) {
+    .nav_btn {
+        margin: 5px;
+    }
+}
+
+/* @media (min-width: 600px) {
+    .nav_btn {
+        display: none;
+    }
+    .nav_btn_active {
+        display: none;
+    }
+    .nav_btn_text {
+        display: block;
+    }
+    .nav_btn_text:hover {
+        text-decoration: underline;
+        color: rgba(59, 213, 253, 1);
+    }
+    .nav_btn_text_active {
+        display: block;
+        padding: 5px;
+        height: auto;
+        width: auto;
+        font-size: 1.5rem;
+        color: rgba(235, 248, 232, 1);
+        border: 2px solid rgba(59, 213, 253, 1);
+    }
+    .nav_btn_text_active:hover {
+        text-decoration: underline;
+        color: rgba(59, 213, 253, 1);
+    }
+} */
+
 /* #002630 BACKGROUDND */
 /* #a9e0d9 #8cedc8 #009560 #3bd5fd GREENISH */
 /* #e20c34 #bd4525 REDISH */

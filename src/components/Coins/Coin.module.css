@@ -303,6 +303,16 @@ button {
     }
 }
 
+@media (min-width: 1800px) {
+    .coin_list {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        /* max-width: 1800px; */
+        justify-content: flex-start;
+    }
+}
+
 @media (max-width: 380px) {
     .add_watchlist_btn {  width: 25px; height: 25px; }
     .coin_element > div {  overflow: hidden;  min-width: 50px; }

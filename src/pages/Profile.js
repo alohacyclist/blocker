@@ -11,8 +11,7 @@ export function Profile() {
     const [like, setLike] = useState('Likes')
     const [editEmail, setEditEmail] = useState(false)
     const [editPassword, setEditPassword] = useState(false)
-
-
+    
     const [email, setEmail] = useState(user?.email)
     const [errorsMail, setErrorsMail] = useState(null)
     const [emailValidated, setEmailValidated] = useState(false)
@@ -77,10 +76,12 @@ export function Profile() {
     const handleDeleteUser = async () => {
         deleteToken()
         setUser(null)
-        const response = await client.post('/auth/delete', {user})
         console.log(response.data)
-        setDisplayMessage('')
+        setShowMessage(true)
+        setDisplayMessage('Account deleted')
         setDeleteAccountConfirmation(false)
+        setTimeout(()=>{setShowMessage(false)}, 2000)
+        const response = await client.post('/auth/delete', {user})
         navigate('/')
         console.log('delete complete')
     }
