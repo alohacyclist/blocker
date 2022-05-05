@@ -11,6 +11,9 @@ export function Profile() {
     const [like, setLike] = useState('Likes')
     const [editEmail, setEditEmail] = useState(false)
     const [editPassword, setEditPassword] = useState(false)
+
+    const [cancelEmail, setCancelEmail] = useState(false)
+    const [cancelPassword, setCancelPassword] = useState(false)
     
     const [email, setEmail] = useState(user?.email)
     const [errorsMail, setErrorsMail] = useState(null)
@@ -80,16 +83,16 @@ export function Profile() {
     }
 
     const handleDeleteUser = async () => {
-        navigate('/')
+        const response = await client.post('/auth/delete', {user})
         deleteToken()
         setUser(null)
         console.log(response.data)
-        setShowMessage(true)
         setDisplayMessage('Account deleted')
+        setShowMessage(true)
         setDeleteAccountConfirmation(false)
         setTimeout(()=>{setShowMessage(false)}, 2000)
-        const response = await client.post('/auth/delete', {user})
         console.log('delete complete')
+        navigate('/')
     }
 
     const deleteToken = () => {
@@ -144,18 +147,19 @@ export function Profile() {
     return (
         <div>
             {editEmail &&
-            
-            <form  className={styles.profile_container} onSubmit={(e) => handleSubmitEmail(e)}>
+            <div className={styles.profile_container}>
+            <form   onSubmit={(e) => handleSubmitEmail(e)}>
                 <p className={styles.form_errors} >Current: {email}</p>
                 <label>Set new E-Mail:</label>
                 <input value={email} type='email' onChange={(e) => {setEmail(e.target.value), checkMail(e.target.value)}}></input>
                 {errorsMail && <small className={styles.form_errors}>E-Mail: {errorsMail}</small>}
                 {emailValidated  && <button className={styles.profile_btn}>Save</button>}
-            </form>}
-            <button className={styles.profile_btn} onClick={(e) => {handleCancel(e)}} >Cancel</button>
+            </form>
+            {cancelEmail && <button className={styles.profile_btn} onClick={(e) => {handleCancel(e)}} >Cancel</button>}
+            </div>}
 
             {editPassword && 
-
+            <div className={styles.profile_container}>
              <form className={styles.profile_container} onSubmit={(e) => handleSubmitPassword(e)}> 
                 <label>Set new Password:</label>
                 <input type='password' onChange={(e) => {setPassword(e.target.value), checkPassword(e.target.value)}} placeholder='Enter new password' ></input>
@@ -165,10 +169,12 @@ export function Profile() {
                 {errorsRepeatPassword && <small className={styles.form_errors}>Repeat Password: {errorsRepeatPassword}</small>}
 
                 {passwordValidated && passwordRepeatValidated && <button className={styles.profile_btn}>Save</button>}             
-            </form>}
-            <button className={styles.profile_btn} onClick={(e) => {handleCancel(e)}} >Cancel</button>
-            
+            </form>
+            {cancelPassword && <button className={styles.profile_btn} onClick={(e) => {handleCancel(e)}} >Cancel</button>}
             {showMessage && <div className={styles.profile_container_msg}><p>{displayMessage}</p></div>}
+
+            </div>}
+            
 
             <div className={styles.profile_container}>
                 <div style={{display:'flex', justifyContent: 'space-between'}}>
@@ -180,8 +186,8 @@ export function Profile() {
                     <p style={{color: 'rgba(235, 248, 232, 1)',backgroundColor: 'rgba(42, 26, 71, 1)', border: '2px solid #f79000', padding: '3px' }}>{user?.firstName} {user?.lastName}</p>
                 </div>     
                 <div>
-                    <button className={styles.profile_btn} onClick={() => setEditEmail(true)}>Edit Email</button>
-                    <button className={styles.profile_btn} onClick={() => setEditPassword(true)}>Edit Password</button>
+                    <button className={styles.profile_btn} onClick={() => {setEditEmail(true), setCancelEmail(true)}}>Edit Email</button>
+                    <button className={styles.profile_btn} onClick={() => {setEditPassword(true), setCancelPassword(true)}}>Edit Password</button>
                     <button className={styles.profile_btn} onClick={(e) => handleDeleteUserClick(e)}>Delete Account</button>
                 </div>           
                 {deleteAccountConfirmation && 
