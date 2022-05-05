@@ -11,7 +11,6 @@ export function ForgotPassword() {
 
   const [email, setEmail] = useState('');
 
-
   if(!openForgotPassword) return null
 
   const handleClose = () => {
@@ -40,7 +39,6 @@ export function ForgotPassword() {
         <p onClick={handleClose}>X</p>
             {showForm && 
                 <form  className='form' onSubmit={handleSubmit}>
-
                     <input id='email' placeholder='Enter your E-Mail' value={email} onChange={(e) => { setEmail(e.target.value) }}/>
                     <button className='forgot_form-btn'>Request Password</button>
                 </form>}

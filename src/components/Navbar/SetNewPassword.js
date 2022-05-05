@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { CryptoContext } from '../../context/cryptoContext'
 import ReactDOM from "react-dom";
 import { client } from '../../client';
-import { Navigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 export function SetNewPassword() {
 

@@ -18,19 +18,17 @@ export function Login() {
   const handleSubmit = (e) => {
     e.preventDefault()
     setDisplayMessage('Loggin you in...')
-    login(mail, password)
+    login(mail.toLowerCase(), password)
     // wait for login function via set timeout
     setTimeout(() => {
       if(user) {
         setDisplayMessage('Enjoy BLOCKER') 
       } else if (!user) {
         setDisplayMessage('Invalid Email or Password. Do you have an account and confirmed your email already?') 
-
       }
     }, 1500)
-
     setShowForm(false)
-    setTimeout(() => {setLogin(false), setShowForm(true), setDisplayMessage(''), navigate('/')}, 4000)
+    setTimeout(() => {setLogin(false), setShowForm(true), setDisplayMessage(''), navigate('/')}, 5000)
   }
 
   const handleClose = () => {setLogin(false)}
@@ -55,26 +53,22 @@ export function Login() {
     <p onClick={handleClose} >X</p>
     {showForm ? 
     <form className='form' onSubmit={handleSubmit}>    
-    <input id='mail' value={mail} onChange={(e) => { setMail(e.target.value) }} placeholder='Enter your E-Mail'/>
-    <input id='password' type='password' value={password} onChange={(e) => { setPassword(e.target.value) }} placeholder='Enter Password'/>
+      <input id='mail' value={mail} onChange={(e) => { setMail(e.target.value) }} placeholder='Enter your E-Mail'/>
+      <input id='password' type='password' value={password} onChange={(e) => { setPassword(e.target.value) }} placeholder='Enter Password'/>
 
-      <p className='form_option' onClick={(e) => handleSignupForm(e)} style={{textAlign: 'center', margin: 0}} >No Account? Sign up for free now!</p>
-      <p className='form_option' onClick={(e) => handleForgotPassword(e)} style={{textAlign: 'center', margin: 0}} >Forgot Password?</p>
+        <p className='form_option' onClick={(e) => handleSignupForm(e)} style={{textAlign: 'center', margin: 0}} >No Account? Sign up for free now!</p>
+        <p className='form_option' onClick={(e) => handleForgotPassword(e)} style={{textAlign: 'center', margin: 0}} >Forgot Password?</p>
 
 
-    <div className='login-options'>
-      <button className='form-btn'>
-        Login
-      </button>
-      <GgleLogin />
+      <div className='login-options'>
+        <button className='form-btn'>
+          Login
+        </button>
+        <GgleLogin />
+      </div>
+    </form> : 
+    <p className='display_message'>{displayMessage}</p>}
     </div>
-  </form> : 
-  <p className='display_message'>{displayMessage}</p>}
-    
-    </div>
-    
-    </>
-    ,
-    document.getElementById('portal')
+    </> , document.getElementById('portal')
   );
 }

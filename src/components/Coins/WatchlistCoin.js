@@ -14,8 +14,7 @@ const [currentPrice, setCurrentPrice] = useState(0)
 const [coinSymbol, setCoinSymbol] = useState('')
 
 const getCurrentCoinPrice = async() => {
-    const {data} = await coingecko.get(`coins/markets/?vs_currency=${currency}&ids=${coin.name}`) /* for testing: &ids=bitcoin%2C%20ethereum */
-    console.log(data[0].current_price)
+    const {data} = await coingecko.get(`coins/markets/?vs_currency=${currency}&ids=${coin.name}`)
     setCoinSymbol(data[0].symbol)
     setCurrentPrice(data[0].current_price)
 }
