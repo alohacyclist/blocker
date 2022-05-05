@@ -22,9 +22,13 @@ export function Login() {
     // wait for login function via set timeout
     if(user) { 
       setDisplayMessage('Enjoy BLOCKER') 
-    } else if (!user) {
-      setDisplayMessage ('Invalid Email or Password. Have you confirmed your Email?')
     }
+    setTimeout(() => {
+      if (!user) {
+        setDisplayMessage ('Invalid Email or Password. Have you confirmed your Email?')
+      }
+    }, 3000)
+
     setShowForm(false)
     setTimeout(() => {setLogin(false), setShowForm(true), setDisplayMessage(''), navigate('/')}, 5000)
   }
