@@ -41,9 +41,11 @@ export const CryptoContextProvider = props => {
             // if user email in db and user status is true (verified)
             setDisplayMessage('A user with this Email already exists.') : 
             setDisplayMessage('Please check your Email to verify your account. Check your junk mail as well. Enjoy Blocker!')
+            setTimeout(()=>{setDisplayMessage('')}, 3500)
         } catch (err) {
           console.error(err)
           setDisplayMessage('Sorry, we could not sign you up. Try again or come back later.')
+          setTimeout(()=>{setDisplayMessage('')}, 3500)
         }
     }
 
