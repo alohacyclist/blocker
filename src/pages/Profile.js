@@ -91,7 +91,6 @@ export function Profile() {
         setShowMessage(true)
         setDeleteAccountConfirmation(false)
         setTimeout(()=>{setShowMessage(false)}, 2000)
-        navigate('/')
     }
 
     const deleteToken = () => {
@@ -186,7 +185,7 @@ export function Profile() {
                 <div>
                     <button className={styles.profile_btn} onClick={() => {setEditEmail(true), setCancelEmail(true)}}>Edit Email</button>
                     <button className={styles.profile_btn} onClick={() => {setEditPassword(true), setCancelPassword(true)}}>Edit Password</button>
-                    <button className={styles.profile_btn} onClick={(e) => handleDeleteUserClick(e)}>Delete Account</button>
+                    <button className={styles.profile_btn} onClick={(e) => {handleDeleteUserClick(e), navigate('/')}}>Delete Account</button>
                 </div>           
                 {deleteAccountConfirmation && 
                 <div className={styles.profile_container_msg}>
