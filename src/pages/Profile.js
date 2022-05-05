@@ -185,12 +185,12 @@ export function Profile() {
                 <div>
                     <button className={styles.profile_btn} onClick={() => {setEditEmail(true), setCancelEmail(true)}}>Edit Email</button>
                     <button className={styles.profile_btn} onClick={() => {setEditPassword(true), setCancelPassword(true)}}>Edit Password</button>
-                    <button className={styles.profile_btn} onClick={(e) => {handleDeleteUserClick(e), navigate('/')}}>Delete Account</button>
+                    <button className={styles.profile_btn} onClick={(e) => {handleDeleteUserClick(e)}}>Delete Account</button>
                 </div>           
                 {deleteAccountConfirmation && 
                 <div className={styles.profile_container_msg}>
                     <p>{displayMessage}</p>
-                    <button className={styles.profile_btn} onClick={() => handleDeleteUser()}>DELETE</button>
+                    <button className={styles.profile_btn} onClick={() => {handleDeleteUser(), navigate('/')}}>DELETE</button>
                 </div>}
             </div>
             
