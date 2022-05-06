@@ -9,7 +9,7 @@ export function SetNewPassword() {
   const { displayMessage, setDisplayMessage, navigate } = useContext(CryptoContext)
   const {userId, resetPasswordToken} = useParams()
 
-  const [showForm, setShowForm] = useState(true)
+  const [showForm, setShowForm] = useState(false)
   const [showMessage, setShowMessage] = useState(false)
   const [openNewPassword, setOpenNewPassword] = useState(true)
 
@@ -38,7 +38,7 @@ export function SetNewPassword() {
 
   useEffect(async()=>{
     const response = await client.get(`/auth/reset-password/${userId}/${resetPasswordToken}`)
-    response.data === 'All good!' ? console.log('user id and token valid') : setShowForm(false)
+    response.data === 'All good!' ? setShowForm(true) : setShowForm(false)
   }, [])
 
 
