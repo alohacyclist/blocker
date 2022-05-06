@@ -9,7 +9,6 @@ export function Home() {
         <Signup />
         <Login />
         <ForgotPassword />
-        <SetNewPassword />
         <CoinList />
     </div>
   )
