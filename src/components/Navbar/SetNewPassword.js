@@ -11,7 +11,7 @@ export function SetNewPassword() {
 
   const [showForm, setShowForm] = useState(true)
   const [showMessage, setShowMessage] = useState(false)
-  const [openNewPassword, setOpenNewPassword] = useState(false)
+  const [openNewPassword, setOpenNewPassword] = useState(true)
 
   const [password, setPassword] = useState('');
   const [repeatPassword, setRepeatPassword] = useState('');
@@ -47,7 +47,7 @@ export function SetNewPassword() {
     return ReactDOM.createPortal(
         <>
         <div className='overlay'></div>
-        {openNewPassword &&
+        
         <div className='signup_container'>
         <p onClick={handleClose}>X</p>
 
@@ -58,7 +58,7 @@ export function SetNewPassword() {
                     <button className='forgot_form-btn' >Save Password</button>
                 </form>}
             {showMessage && <div className='display_message' ><p>{displayMessage}</p></div>}
-          </div>}
+          </div>
           </>,
         document.getElementById('portal')
       )
