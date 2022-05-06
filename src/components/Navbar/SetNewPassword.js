@@ -11,7 +11,7 @@ export function SetNewPassword() {
 
   const [showForm, setShowForm] = useState(false)
   const [showMessage, setShowMessage] = useState(false)
-  const [openNewPassword, setOpenNewPassword] = useState(false)
+  const [openNewPassword, setOpenNewPassword] = useState(true)
 
   const [password, setPassword] = useState('');
   const [repeatPassword, setRepeatPassword] = useState('');
@@ -38,7 +38,7 @@ export function SetNewPassword() {
 
   useEffect(async()=>{
     const response = await client.get(`/auth/reset-password/${userId}/${resetPasswordToken}`)
-    response.data === 'All good!' ? (setShowForm(true), setOpenNewPassword(true)) : setShowForm(false)
+    response.data === 'All good!' ? (setShowForm(true)) : setShowForm(false)
   }, [])
 
 

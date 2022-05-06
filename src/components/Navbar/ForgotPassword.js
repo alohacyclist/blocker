@@ -29,7 +29,8 @@ export function ForgotPassword() {
     setShowForm(false)
     setDisplayMessage('Check your Email to reset your password. See you soon!')
     setShowMessage(true)
-    setTimeout(() => {setDisplayMessage(''), setShowMessage(false)}, 2500)
+    setTimeout(() => {setDisplayMessage('')}, 2400)
+    setTimeout(() => {setShowMessage(false)}, 2500)
   }
 
     return ReactDOM.createPortal(
