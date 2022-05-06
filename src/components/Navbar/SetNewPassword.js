@@ -9,9 +9,9 @@ export function SetNewPassword() {
   const { displayMessage, setDisplayMessage, navigate } = useContext(CryptoContext)
   const {userId, resetPasswordToken} = useParams()
 
-  const [showForm, setShowForm] = useState(false)
+  const [showForm, setShowForm] = useState(true)
   const [showMessage, setShowMessage] = useState(false)
-  const [openNewPassword, setOpenNewPassword] = useState(true)
+  const [openNewPassword, setOpenNewPassword] = useState(false)
 
   const [password, setPassword] = useState('');
   const [repeatPassword, setRepeatPassword] = useState('');
@@ -31,6 +31,7 @@ export function SetNewPassword() {
     setShowForm(false)
     setDisplayMessage('Your password has been reset. Enjoy BLOCKER!')
     setShowMessage(true)
+    setOpenNewPassword(false)
     setTimeout(()=>{
       navigate('/')
     }, 3000)
@@ -38,7 +39,7 @@ export function SetNewPassword() {
 
   useEffect(async()=>{
     const response = await client.get(`/auth/reset-password/${userId}/${resetPasswordToken}`)
-    response.data === 'All good!' ? (setShowForm(true)) : setShowForm(false)
+    response.data === 'All good!' ? (setOpenNewPassword(true)) : setShowForm(false)
   }, [])
 
 
@@ -46,8 +47,10 @@ export function SetNewPassword() {
     return ReactDOM.createPortal(
         <>
         <div className='overlay'></div>
+        {openNewPassword &&
         <div className='signup_container'>
         <p onClick={handleClose}>X</p>
+
             {showForm && 
                 <form  className='form' onSubmit={handleSubmit}>
                     <input id='password' type='password' placeholder='Enter new Password' value={password} onChange={(e) => { setPassword(e.target.value) }}/>
@@ -55,7 +58,7 @@ export function SetNewPassword() {
                     <button className='forgot_form-btn' >Save Password</button>
                 </form>}
             {showMessage && <div className='display_message' ><p>{displayMessage}</p></div>}
-          </div>
+          </div>}
           </>,
         document.getElementById('portal')
       )
