@@ -32,9 +32,7 @@ export function SetNewPassword() {
     setDisplayMessage('Your password has been reset. Enjoy BLOCKER!')
     setShowMessage(true)
     setTimeout(()=>{
-      navigate('/'),
-      setDisplayMessage(''),
-      setShowMessage(false)
+      navigate('/')
     }, 3000)
   }
 
