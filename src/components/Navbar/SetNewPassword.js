@@ -31,10 +31,7 @@ export function SetNewPassword() {
     setShowForm(false)
     setDisplayMessage('Your password has been reset. Enjoy BLOCKER!')
     setShowMessage(true)
-    setOpenNewPassword(false)
-    setTimeout(()=>{
-      navigate('/')
-    }, 3000)
+    setTimeout(()=> navigate('/'), 3000)
   }
 
   useEffect(async()=>{
