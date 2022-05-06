@@ -12,16 +12,14 @@ export function GgleLogin() {
   const googleAuth = async (firstName, lastName, email) => {
     try {
         const response = await client.post('/auth/google-login', {firstName, lastName, email})
-        console.log('google-login-response:', response)
         setLogin(false)
         googleLogin(response.data.user, response.data.token)        
-    } catch {
-      console.log('google auth failed.')
+    } catch (err) {
+      console.log(err)
     }
   }
 
   const onSuccessResponse = (res) => {
-    console.log('Google-Login successful:', res.profileObj)
     googleAuth(res.profileObj.givenName, res.profileObj.familyName, res.profileObj.email)
   }
 

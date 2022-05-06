@@ -26,7 +26,6 @@ export function CoinChart() {
 
 const getChartInfo = async (coinSelect) => {
   const {data} = await coingecko.get(`coins/markets/?vs_currency=${currency}&ids=${coinSelect}`)
-  console.log('chartInfo:',data)
   setChartInfo(data[0])
 }
 

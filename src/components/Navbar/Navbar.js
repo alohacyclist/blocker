@@ -28,7 +28,6 @@ export function Navbar() {
   const logout = () => {
     deleteToken()
     setUser(null)
-    console.log('user logged out')
     navigate('/')
   }
 

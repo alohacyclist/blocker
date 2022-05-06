@@ -24,7 +24,6 @@ useEffect(() => getCurrentCoinPrice(), [])
 // remove coin from watchlist and render updated watchlist
 const handleDelete = async (e, coin) => {
   e.preventDefault()
-  console.log(coin, 'removed')
   const data = {id: coin}
   const config = { headers: {Authorization: localStorage.getItem('token')} }
   await client.post(`/watchlist/${user._id}/coin`, data, config)

@@ -25,21 +25,21 @@ export function SetNewPassword() {
     try {
         const response = await client.post(`/auth/password-reset/${userId}`, {password})
         console.log('new password submit:', response)
-    } catch (error ){
+    } catch (error){
         console.log('something went wrong:', error)
     }
     setShowForm(false)
     setDisplayMessage('Your password has been reset. Enjoy BLOCKER!')
     setShowMessage(true)
     setTimeout(()=>{
-      navigate('/')
-    }, 5000)
+      navigate('/'),
+      setDisplayMessage(''),
+      setShowMessage(false)
+    }, 3000)
   }
 
   useEffect(async()=>{
-    console.log(userId, resetPasswordToken)
     const response = await client.get(`/auth/reset-password/${userId}/${resetPasswordToken}`)
-    console.log(response.data)
     response.data === 'All good!' ? console.log('user id and token valid') : setShowForm(false)
   }, [])
 

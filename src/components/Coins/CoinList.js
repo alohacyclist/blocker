@@ -77,8 +77,7 @@ export function CoinList() {
         setActive30dBtn(false),
         setActive200dBtn(false),
         setActive1yBtn(false),
-        setActive1hBtn(true),
-        console.log('1h')
+        setActive1hBtn(true)
         break;
       case '1d':
         setPercentage24h(true),
@@ -94,8 +93,7 @@ export function CoinList() {
         setActive30dBtn(false),
         setActive200dBtn(false),
         setActive1yBtn(false),
-        setActive1hBtn(false),
-        console.log('24h')
+        setActive1hBtn(false)
         break;
       case '7d':
         setPercentage7d(true),
@@ -111,8 +109,7 @@ export function CoinList() {
         setActive30dBtn(false),
         setActive200dBtn(false),
         setActive1yBtn(false),
-        setActive1hBtn(false),
-        console.log('7d')
+        setActive1hBtn(false)
         break;
       case '14d':
         setPercentage14d(true),
@@ -128,8 +125,7 @@ export function CoinList() {
         setActive30dBtn(false),
         setActive200dBtn(false),
         setActive1yBtn(false),
-        setActive1hBtn(false),
-        console.log('14d')
+        setActive1hBtn(false)
         break;
       case '30d':
         setPercentage30d(true)
@@ -145,8 +141,7 @@ export function CoinList() {
         setActive30dBtn(true),
         setActive200dBtn(false),
         setActive1yBtn(false),
-        setActive1hBtn(false),
-        console.log('30d')
+        setActive1hBtn(false)
         break;
       case '200d':
         setPercentage200d(true),
@@ -162,8 +157,7 @@ export function CoinList() {
         setActive30dBtn(false),
         setActive200dBtn(true),
         setActive1yBtn(false),
-        setActive1hBtn(false),
-        console.log('200d')
+        setActive1hBtn(false)
         break;
       case '1y':
         setPercentage1y(true),
@@ -179,8 +173,7 @@ export function CoinList() {
         setActive30dBtn(false),
         setActive200dBtn(false),
         setActive1yBtn(true),
-        setActive1hBtn(false),
-        console.log('1y')
+        setActive1hBtn(false)
         break;
       default:
         setPercentage24h(true),

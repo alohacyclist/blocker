@@ -83,7 +83,6 @@ const options = {
 
   const addCoin = async (e) => {
     e.preventDefault()
-    console.log(coin.name, 'added to watchlist')
     const url = '/coin/watchlist'
     const data = {
       name: coin.id,
@@ -106,9 +105,8 @@ const options = {
     try {
       const {data} = await client.post(`/watchlist/${coin.id}/check`)
       setRenderAddCoin(data)
-      console.log('check:', data)
-    } catch {
-      console.log('could not get your watchlist')
+    } catch (err) {
+      console.log(err)
     }
   }
 
