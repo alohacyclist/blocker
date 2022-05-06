@@ -39,7 +39,7 @@ export function SetNewPassword() {
 
   useEffect(async()=>{
     const response = await client.get(`/auth/reset-password/${userId}/${resetPasswordToken}`)
-    response.data === 'All good!' ? (setOpenNewPassword(true)) : setShowForm(false)
+    response.data === 'All good!' ? (setOpenNewPassword(true), console.log('allgood'), setShowForm(true)) : (setShowForm(false), console.log('not good'))
   }, [])
 
 
@@ -52,7 +52,7 @@ export function SetNewPassword() {
         <p onClick={handleClose}>X</p>
 
             {showForm && 
-                <form  className='form' onSubmit={handleSubmit}>
+                <form  className='form' onSubmit={(e) => handleSubmit(e)}>
                     <input id='password' type='password' placeholder='Enter new Password' value={password} onChange={(e) => { setPassword(e.target.value) }}/>
                     <input id='password-repeat' type='password' placeholder='Repeat new Password' value={repeatPassword} onChange={(e) => { setRepeatPassword(e.target.value) }}/>
                     <button className='forgot_form-btn' >Save Password</button>
