@@ -1,5 +1,5 @@
 import React from 'react'
-import { CoinList, Signup, Login, ForgotPassword } from '../components'
+import { CoinList, Signup, Login, ForgotPassword, SetNewPassword } from '../components'
 
 export function Home() {
 
@@ -9,6 +9,7 @@ export function Home() {
         <Signup />
         <Login />
         <ForgotPassword />
+        <SetNewPassword />
         <CoinList />
     </div>
   )

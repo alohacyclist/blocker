@@ -21,15 +21,15 @@ export function ForgotPassword() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-        const response = await client.post('/auth/password-reset', { email })
-        console.log(response.data)
-    } catch {
-        console.log('something went wrong.')
+      await client.post('/auth/password-reset', { email })
+    } catch (err) {
+      console.log(err)
     }
     setLogin(false)
     setShowForm(false)
     setDisplayMessage('Check your Email to reset your password. See you soon!')
     setShowMessage(true)
+    setTimeout(() => setDisplayMessage(''), setShowMessage(false), 2500)
   }
 
     return ReactDOM.createPortal(
