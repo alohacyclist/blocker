@@ -112,7 +112,6 @@ export function Navbar() {
       <nav>
         <div className='nav-icons-container'>
             <button className={activeHomeBtn ? 'nav_btn_active' : 'nav_btn'} onClick={(e) => {handleHomeBtn(e), navigate('/')}}><FiHome/></button>
-            {/* <button className={activeHomeBtn ? 'nav_btn_text_active' : 'nav_btn_text'} onClick={(e) => {handleHomeBtn(e), navigate('/')}}>HOME</button> */}
             <button className={activeUserWatchlistBtn ? 'nav_btn_active' : 'nav_btn'}  onClick={(e) => {handleUserWatchlistBtn(e), navigate('/watchlist')}}><CgUserList/></button>
         
             <button className={activeSearchBtn ? 'nav_btn_active' : 'nav_btn'} onClick={(e) => {handleSearchStyle(e), handleSearchBtn(e)}}><VscSearch /></button>
