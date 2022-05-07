@@ -50,7 +50,6 @@ export function UserWatchlist({watchlist}) {
   const getCoinCopy = () => {
   coinCopy = JSON.parse(JSON.stringify(coins))
     coinCopy.forEach((coin, index) => {
-      /* console.log(coinPriceNow) */
       coin.current_price = coinPriceNow[index].current_price.current_price
     })
   }
@@ -61,7 +60,6 @@ export function UserWatchlist({watchlist}) {
   useEffect(()=> {getWatchlists()}, [])
 
   const handleLike = async (watchlist) => {
-    /* console.log(watchlist) */
     const url = `/watchlist/${watchlist._id}`
     const config = {
       headers: {
@@ -82,11 +80,8 @@ export function UserWatchlist({watchlist}) {
             <div className={styles.likes_container} onClick={() => handleLike(watchlist)}>{watchlistLikes} <AiOutlineLike/></div>  
           </div>
 
-          {/* {console.log(watchlist)} */}
             {coinCopy.map(coin => {return (
               <div className={styles.watchlist_coins_container} key={coin._id} >
-              {/* <WatchlistCoin coin={coin} /> */}
-                {/* {console.log(coin)} */}
                 <div style={{backgroundColor: 'rgba(59, 213, 253, 1)', color: 'rgba(5, 0, 30, 1)'}}>{coin.name}</div>
                 
                 <div>Added on:{new Date(coin.addedAt).toLocaleDateString()} @ {coin.priceWhenAdded} {currency}</div>
@@ -94,9 +89,6 @@ export function UserWatchlist({watchlist}) {
                 <div>Coin Performance:  {coinPerformance(coin.priceWhenAdded, coin.current_price?.current_price)} %</div>
               </div>
               )})}
-          
-          {/* <div>Watchlist Performance : </div> */}
-
         </div>) : (
         <div className={styles.watchlist_item_unselected}>
           {watchlist?.id?.firstName}'s Watchlist
