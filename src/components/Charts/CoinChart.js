@@ -25,13 +25,17 @@ export function CoinChart() {
 }
 
 const getChartInfo = async (coinSelect) => {
+  setIsLoading(true)
   const {data} = await coingecko.get(`coins/markets/?vs_currency=${currency}&ids=${coinSelect}`)
   setChartInfo(data[0])
+  setIsLoading(false)
 }
 
 useEffect(() => {
+  setIsLoading(true)
   getChartData(coinSelect)
   getChartInfo(coinSelect)
+  setIsLoading(false)
 }, [coinSelect])
 
 const labels = chartData?.map(dataset =>  new Date(dataset[0]).toLocaleDateString())
@@ -90,6 +94,7 @@ const options = {
           </div>
           
           <div className={styles.main_chart}>
+            {isLoading && <p>Generating Chart</p>}
             {<Line data={formatedData} options={options} />}
           </div>
             

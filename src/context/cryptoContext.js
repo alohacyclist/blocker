@@ -29,25 +29,24 @@ export const CryptoContextProvider = props => {
     
   const navigate = useNavigate()
   
-
-    const saveToken = (token) => {
-        localStorage.setItem('token', `Bearer ${token}`);
+  const saveToken = (token) => {
+      localStorage.setItem('token', `Bearer ${token}`);
       }
 
-    const signup = async (firstName, lastName, email, password) => {
-        try {
-            const response = await client.post('/auth/signup', {firstName, lastName, email, password})
-            response.data.status ? 
-            // if user email in db and user status is true (verified)
-            setDisplayMessage('A user with this Email already exists.') : 
-            setDisplayMessage('Please check your Email to verify your account. Check your junk mail as well. Enjoy Blocker!')
-            setTimeout(()=>{setDisplayMessage('')}, 3500)
-        } catch (err) {
-          console.error(err)
-          setDisplayMessage('Sorry, we could not sign you up. Try again or come back later.')
+  const signup = async (firstName, lastName, email, password) => {
+      try {
+          const response = await client.post('/auth/signup', {firstName, lastName, email, password})
+          response.data.status ? 
+          // if user email in db and user status is true (verified)
+          setDisplayMessage('A user with this Email already exists.') : 
+          setDisplayMessage('Please check your Email to verify your account. Check your junk mail as well. Enjoy Blocker!')
           setTimeout(()=>{setDisplayMessage('')}, 3500)
-        }
-    }
+      } catch (err) {
+      console.error(err)
+      setDisplayMessage('Sorry, we could not sign you up. Try again or come back later.')
+      setTimeout(()=>{setDisplayMessage('')}, 3500)
+      }
+  }
 
     const login = async (email, password) => {
         try {
@@ -66,7 +65,6 @@ export const CryptoContextProvider = props => {
 
     const googleLogin = async (user, token) => {
       try {
-        console.log('logged in with google:', user, token)
         saveToken(token)
         setUser(user)
       } catch (err) {
@@ -78,12 +76,9 @@ export const CryptoContextProvider = props => {
         try {
             const response = await client.post('/auth/verify')
             setUser(response?.data?.user)
-            console.log('user verified!')
-            console.log('verify response user data:', response.data.user)
             await watchlist(response?.data?.user._id)
-            /* navigate('/') */ // CHANGE TO USER WATCHLIST/PROFILE
-        } catch {
-            console.log('user not verified!')
+        } catch (err) {
+            console.log(err)
         }
     }
 
@@ -97,25 +92,21 @@ export const CryptoContextProvider = props => {
     }, [currency])
 
 
-    const watchlist = async (userId) => {
-      try {
-          const response = await client.get(`/watchlist/${userId}`)
-          /* console.log('User Id passed to watchlist function:', userId)
-          console.log('data received from watchlist function:', response.data) */
-          setUserWatchlist(response?.data)
-      }  catch {
-          console.log('could not get the watchlist for this useree')
-      }
+  const watchlist = async (userId) => {
+    try {
+        const response = await client.get(`/watchlist/${userId}`)
+        setUserWatchlist(response?.data)
+    }  catch (err) {
+        console.log(err)
+    }
   }
 
   const getUserWatchlist = async (userId) => {
     try {
-        const response = await client.get(`user/watchlist/${userId}`)
-        /* console.log('User Id passed to userWatchlist function:', userId)
-        console.log('data received from userWatchlist function:', response.data) */
-        setUserWatchlist(response?.data)
-    }  catch {
-        console.log('could not get your watchlist')
+      const response = await client.get(`user/watchlist/${userId}`)
+      setUserWatchlist(response?.data)
+    }  catch (err){
+        console.log(err)
     }
   }
 
@@ -128,14 +119,12 @@ export const CryptoContextProvider = props => {
     }
     const {data} = await client.get(url, config)
     setWatchlists(data)
-    /* console.log('All Watchlists Data:', data) */
   }
 
-    const handleSelect = (e, coin) => {
-        e.preventDefault()
-        setCoinSelect(coin)
-        console.log(coin)
-      }
+  const handleSelect = (e, coin) => {
+      e.preventDefault()
+      setCoinSelect(coin)
+    }
 
     // calculate coinPerformance
     const coinPerformance = (wasPrice, isPrice) => {

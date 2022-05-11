@@ -175,7 +175,6 @@ button {
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
-    /* border: 1px solid var(--text); */
 }
 
 .likes_container {
@@ -276,11 +275,6 @@ button {
     width: 45px;
     height: 25px;
     transition: ease-in;
-}
-
-.select-btn:hover {
-    background-color: rgba(59, 213, 253, 1);
-    color: rgba(5, 0, 30, 1);
 }
 
 .select_btn_active {
