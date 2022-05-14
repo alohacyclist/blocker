@@ -220,7 +220,7 @@ export function CoinList() {
         <input className={searchStyle} value={coinSearch} onChange={(e) => setCoinSearch(e.target.value)} placeholder={searchPlaceholder} />
       </div>
       
-      {isLoading? <BarLoader> : null }
+      {isLoading? <BarLoader /> : null }
 
       <div className={styles.coin_list}>
 
