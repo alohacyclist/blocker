@@ -4,6 +4,8 @@ import { Coin } from './Coin'
 import coingecko from '../../api/coingecko'
 import styles from './Coin.module.css'
 import { CoinChart } from '../'
+import { css } from "@emotion/react";
+import BarLoader from "react-spinners/BarLoader";
 
 export function CoinList() {
   const {currency, setCurrency, isLoading, setIsLoading, searchStyle, searchPlaceholder} = useContext(CryptoContext)
@@ -218,7 +220,7 @@ export function CoinList() {
         <input className={searchStyle} value={coinSearch} onChange={(e) => setCoinSearch(e.target.value)} placeholder={searchPlaceholder} />
       </div>
       
-      {isLoading? 'Loading...' : null }
+      {isLoading? <BarLoader> : null }
 
       <div className={styles.coin_list}>
 
