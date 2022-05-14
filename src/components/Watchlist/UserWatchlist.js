@@ -76,7 +76,7 @@ export function UserWatchlist({watchlist}) {
         <div className={styles.watchlist_item_selected}>
           <div className={styles.watchlist_item_header}>
             {watchlist?.id?.firstName}'s Watchlist
-            <button className={styles.likes_container} onClick={() => handleLike(watchlist)}>{watchlistLikes} <AiOutlineLike/></button>  
+            <div className={styles.likes_container}>{watchlistLikes} <AiOutlineLike/></div>  
           </div>
 
             {coinCopy.map(coin => {return (
@@ -91,7 +91,7 @@ export function UserWatchlist({watchlist}) {
         </div>) : (
         <div className={styles.watchlist_item_unselected}>
           {watchlist?.id?.firstName}'s Watchlist
-          <div className={styles.likes_container}>{watchlist?.votes?.length} <AiOutlineLike/></div>
+          <button className={styles.likes_container} onClick={() => handleLike(watchlist)} >{watchlist?.votes?.length} <AiOutlineLike/></button>
         </div>
       )}
       </div>}
