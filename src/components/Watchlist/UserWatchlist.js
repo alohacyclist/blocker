@@ -18,7 +18,6 @@ export function UserWatchlist({watchlist}) {
 
   const handleWatchlistSelect = async (e, watchlist_id) => {
     e.preventDefault()
-    if(!user) console.log('login or signup')
     if(select) {
       setSelect(false)
     } else {
@@ -67,6 +66,9 @@ export function UserWatchlist({watchlist}) {
       }
     }
     await client.post(url, config)
+    console.log(watchlist._id)
+    window.location.reload(false)
+
   }
 
   return (
