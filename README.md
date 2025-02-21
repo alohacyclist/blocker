@@ -58,7 +58,7 @@ npm -v
 
 1. **Clone** (or download) the repository:
    ```bash
-   git clone https://github.com/your-username/blocker.git
+   git clone https://github.com/alohacyclist/blocker.git
    ```
 2. **Change** into the project directory:
    ```bash
